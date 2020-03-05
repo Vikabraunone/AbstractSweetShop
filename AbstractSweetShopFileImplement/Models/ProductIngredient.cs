@@ -1,4 +1,4 @@
-﻿namespace AbstractSweetShopListImplement.Models
+﻿namespace AbstractSweetShopFileImplement.Models
 {
     /// <summary>
     /// Сколько компонентов требуется при изготовлении изделия

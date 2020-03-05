@@ -1,14 +1,14 @@
 ﻿using AbstractSweetShopBusinessLogic.Enums;
 using System;
 
-namespace AbstractSweetShopBusinessLogic.BindingModels
+namespace AbstractSweetShopFileImplement.Models
 {
-    /// <summary>     
-    /// Заказ     
-    /// </summary>    
-    public class OrderBindingModel
+    /// <summary>
+    /// Заказ
+    /// </summary>
+    public class Order
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         public int ProductId { get; set; }
 
@@ -21,7 +21,5 @@ namespace AbstractSweetShopBusinessLogic.BindingModels
         public DateTime DateCreate { get; set; }
 
         public DateTime? DateImplement { get; set; }
-
-        public string ProductName { get; set; }
     }
 }
