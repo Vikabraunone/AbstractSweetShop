@@ -56,7 +56,6 @@ namespace AbstractSweetShopView
                     dataGridView.Columns[5].Width = 90;
                     dataGridView.Columns[6].Width = 110;
                     dataGridView.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
                 }
             }
             catch (Exception ex)
