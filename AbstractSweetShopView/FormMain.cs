@@ -60,6 +60,7 @@ namespace AbstractSweetShopView
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.InnerException.Message);
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

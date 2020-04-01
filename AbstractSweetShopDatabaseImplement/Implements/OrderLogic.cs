@@ -2,7 +2,6 @@
 using AbstractSweetShopBusinessLogic.Interfaces;
 using AbstractSweetShopBusinessLogic.ViewModels;
 using AbstractSweetShopDatabaseImplement.Models;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +25,6 @@ namespace AbstractSweetShopDatabaseImplement.Implements
                 {
                     element = new Order();
                     context.Orders.Add(element);
-
                 }
                 element.ProductId = model.ProductId == 0 ? element.ProductId : model.ProductId;
                 element.Count = model.Count;
@@ -58,7 +56,6 @@ namespace AbstractSweetShopDatabaseImplement.Implements
             using (var context = new AbstractSweetShopDatabase())
             {
                 return context.Orders
-                .Include(rec => rec.Product)
                 .Where(rec => model == null || rec.Id == model.Id)
                 .Select(rec => new OrderViewModel
                 {

@@ -1,6 +1,5 @@
 ﻿using AbstractSweetShopDatabaseImplement.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer;
 
 namespace AbstractSweetShopDatabaseImplement
 {
@@ -10,7 +9,7 @@ namespace AbstractSweetShopDatabaseImplement
         {
             if (optionsBuilder.IsConfigured == false)
             {
-                optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-2ACH9S6\SQLEXPRESS;Initial Catalog=SecuritySystemDatabase;Integrated Security=True;MultipleActiveResultSets=True;");
+                optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-2ACH9S6\SQLEXPRESS;Initial Catalog=AbstractSweetShopDatabase;Integrated Security=True;MultipleActiveResultSets=True;");
             }
             base.OnConfiguring(optionsBuilder);
         }
