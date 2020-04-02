@@ -56,18 +56,18 @@ namespace AbstractSweetShopListImplement.Implements
         public List<ProductViewModel> Read(ProductBindingModel model)
         {
             List<ProductViewModel> result = new List<ProductViewModel>();
-            foreach (var ingredient in source.Products)
+            foreach (var product in source.Products)
             {
                 if (model != null)
                 {
-                    if (ingredient.Id == model.Id)
+                    if (product.Id == model.Id)
                     {
-                        result.Add(CreateViewModel(ingredient));
+                        result.Add(CreateViewModel(product));
                         break;
                     }
                     continue;
                 }
-                result.Add(CreateViewModel(ingredient));
+                result.Add(CreateViewModel(product));
             }
             return result;
         }
@@ -113,19 +113,19 @@ namespace AbstractSweetShopListImplement.Implements
 
         private ProductViewModel CreateViewModel(Product product)
         {
-            // требуется дополнительно получить список компонентов для изделия с названиями и их количество
+            // требуется дополнительно получить список ингредиентов для изделия с названиями и их количество
             Dictionary<int, (string, int)> productIngredients = new Dictionary<int, (string, int)>();
             foreach (var pi in source.ProductIngredients)
                 if (pi.ProductId == product.Id)
                 {
-                    string componentName = string.Empty;
-                    foreach (var component in source.Ingredients)
-                        if (pi.IngredientId == component.Id)
+                    string ingredientName = string.Empty;
+                    foreach (var ingredient in source.Ingredients)
+                        if (pi.IngredientId == ingredient.Id)
                         {
-                            componentName = component.IngredientName;
+                            ingredientName = ingredient.IngredientName;
                             break;
                         }
-                    productIngredients.Add(pi.IngredientId, (componentName, pi.Count));
+                    productIngredients.Add(pi.IngredientId, (ingredientName, pi.Count));
                 }
             return new ProductViewModel
             {

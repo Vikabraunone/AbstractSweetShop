@@ -1,6 +1,7 @@
 ﻿using AbstractSweetShopBusinessLogic.BusinessLogics;
 using AbstractSweetShopBusinessLogic.Interfaces;
 using AbstractSweetShopListImplement.Implements;
+
 using System;
 using System.Windows.Forms;
 using Unity;
@@ -28,6 +29,7 @@ namespace AbstractSweetShopView
             currentContainer.RegisterType<IIngredientLogic, IngredientLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IOrderLogic, OrderLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IProductLogic, ProductLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IStoreHouseLogic, StoreHouseLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<MainLogic>(new HierarchicalLifetimeManager());
             return currentContainer;
         }
