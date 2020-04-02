@@ -21,5 +21,7 @@ namespace AbstractSweetShopBusinessLogic.BindingModels
         public DateTime DateCreate { get; set; }
 
         public DateTime? DateImplement { get; set; }
+
+        public string ProductName { get; set; }
     }
 }

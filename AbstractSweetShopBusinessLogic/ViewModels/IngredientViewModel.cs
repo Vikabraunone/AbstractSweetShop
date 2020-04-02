@@ -9,7 +9,7 @@ namespace AbstractSweetShopBusinessLogic.ViewModels
     {
         public int Id { get; set; }
 
-        [DisplayName("Название ингредиента")] 
+        [DisplayName("Название ингредиента")]
         public string IngredientName { get; set; }
     }
 }
