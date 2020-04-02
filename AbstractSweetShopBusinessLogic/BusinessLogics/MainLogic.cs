@@ -48,7 +48,7 @@ namespace AbstractSweetShopBusinessLogic.BusinessLogics
 
         public void FinishOrder(ChangeStatusBindingModel model)
         {
-            var order = orderLogic.Read(new OrderBindingModel { Id = model.OrderId})?[0];
+            var order = orderLogic.Read(new OrderBindingModel { Id = model.OrderId })?[0];
             if (order == null)
                 throw new Exception("Не найден заказ");
             if (order.Status != OrderStatus.Выполняется)
@@ -67,7 +67,7 @@ namespace AbstractSweetShopBusinessLogic.BusinessLogics
 
         public void PayOrder(ChangeStatusBindingModel model)
         {
-            var order = orderLogic.Read(new OrderBindingModel { Id = model.OrderId})?[0];
+            var order = orderLogic.Read(new OrderBindingModel { Id = model.OrderId })?[0];
             if (order == null)
                 throw new Exception("Не найден заказ");
             if (order.Status != OrderStatus.Готов)
