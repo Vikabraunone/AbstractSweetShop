@@ -51,12 +51,11 @@ namespace AbstractSweetShopFileImplement.Implements
 
         public List<OrderViewModel> Read(OrderBindingModel model)
         {
-            var products = source.Products;
             return source.Orders.Where(rec => model == null || rec.Id == model.Id)
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
-                    Count = rec.ProductId,
+                    Count = rec.Count,
                     Sum = rec.Sum,
                     Status = rec.Status,
                     ProductName = source.Products.FirstOrDefault(rec1 => rec.ProductId == rec1.Id).ProductName,
