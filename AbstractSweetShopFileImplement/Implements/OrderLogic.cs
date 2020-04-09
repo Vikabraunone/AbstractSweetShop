@@ -58,6 +58,7 @@ namespace AbstractSweetShopFileImplement.Implements
                     Count = rec.Count,
                     Sum = rec.Sum,
                     Status = rec.Status,
+                    ProductId = rec.ProductId,
                     ProductName = source.Products.FirstOrDefault(rec1 => rec.ProductId == rec1.Id).ProductName,
                     DateCreate = rec.DateCreate,
                     DateImplement = rec.DateImplement

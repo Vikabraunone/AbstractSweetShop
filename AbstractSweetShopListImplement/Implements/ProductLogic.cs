@@ -77,11 +77,11 @@ namespace AbstractSweetShopListImplement.Implements
             product.ProductName = model.ProductName;
             product.Price = model.Price;
             //обновляем существуюущие ингредиенты и ищем максимальный идентификатор
-            int maxPCId = 0;
+            int maxPIId = 0;
             for (int i = 0; i < source.ProductIngredients.Count; ++i)
             {
-                if (source.ProductIngredients[i].Id > maxPCId)
-                    maxPCId = source.ProductIngredients[i].Id;
+                if (source.ProductIngredients[i].Id > maxPIId)
+                    maxPIId = source.ProductIngredients[i].Id;
                 if (source.ProductIngredients[i].ProductId == product.Id)
                 {
                     // если в модели пришла запись ингредиента с таким id
@@ -102,7 +102,7 @@ namespace AbstractSweetShopListImplement.Implements
             {
                 source.ProductIngredients.Add(new ProductIngredient
                 {
-                    Id = ++maxPCId,
+                    Id = ++maxPIId,
                     ProductId = product.Id,
                     IngredientId = pi.Key,
                     Count = pi.Value.Item2

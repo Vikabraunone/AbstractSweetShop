@@ -30,7 +30,7 @@ namespace AbstractSweetShopFileImplement.Implements
             }
             else
             {
-                int maxId = source.Products.Count > 0 ? source.Ingredients.Max(rec => rec.Id) : 0;
+                int maxId = source.Products.Count > 0 ? source.Products.Max(rec => rec.Id) : 0;
                 element = new Product { Id = maxId + 1 };
                 source.Products.Add(element);
             }
@@ -40,12 +40,12 @@ namespace AbstractSweetShopFileImplement.Implements
             source.ProductIngredients.RemoveAll(rec =>
                 rec.ProductId == model.Id && !model.ProductIngredients.ContainsKey(rec.IngredientId));
             // обновили количество у существующих записей
-            var updateComponents = source.ProductIngredients.Where(rec =>
+            var updateIngredients = source.ProductIngredients.Where(rec =>
                 rec.ProductId == model.Id && model.ProductIngredients.ContainsKey(rec.IngredientId));
-            foreach (var updateComponent in updateComponents)
+            foreach (var updateIngredient in updateIngredients)
             {
-                updateComponent.Count = model.ProductIngredients[updateComponent.IngredientId].Item2;
-                model.ProductIngredients.Remove(updateComponent.IngredientId);
+                updateIngredient.Count = model.ProductIngredients[updateIngredient.IngredientId].Item2;
+                model.ProductIngredients.Remove(updateIngredient.IngredientId);
             }
             // добавили новые
             int maxPCId = source.ProductIngredients.Count > 0 ? source.ProductIngredients.Max(rec => rec.Id) : 0;
@@ -61,7 +61,7 @@ namespace AbstractSweetShopFileImplement.Implements
 
         public void Delete(ProductBindingModel model)
         {
-            // удаляем записи по компонентам при удалении кондитерского изделия
+            // удаляем записи по ингредиентам при удалении кондитерского изделия
             source.ProductIngredients.RemoveAll(rec => rec.ProductId == model.Id);
             Product element = source.Products.FirstOrDefault(rec => rec.Id == model.Id);
             if (element != null)
@@ -80,9 +80,9 @@ namespace AbstractSweetShopFileImplement.Implements
                     ProductName = rec.ProductName,
                     Price = rec.Price,
                     ProductIngredients = source.ProductIngredients
-                    .Where(recPC => recPC.ProductId == rec.Id)
-                    .ToDictionary(recPC => recPC.IngredientId, recPC =>
-                    (source.Ingredients.FirstOrDefault(recC => recC.Id == recPC.IngredientId)?.IngredientName, recPC.Count))
+                    .Where(recPI => recPI.ProductId == rec.Id)
+                    .ToDictionary(recPI => recPI.IngredientId, recPI =>
+                    (source.Ingredients.FirstOrDefault(recI => recI.Id == recPI.IngredientId)?.IngredientName, recPI.Count))
                 })
                 .ToList();
         }
