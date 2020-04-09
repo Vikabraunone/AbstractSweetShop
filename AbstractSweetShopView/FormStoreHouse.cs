@@ -16,6 +16,7 @@ namespace AbstractSweetShopView
         private readonly IStoreHouseLogic logicS;
 
         private Dictionary<int, (string, int)> storeHouseIngredients;
+
         public int? Id { set { id = value; } }
 
         private int? id;
@@ -64,19 +65,10 @@ namespace AbstractSweetShopView
                 storeHouseIngredients = new Dictionary<int, (string, int)>();
         }
 
-        private void buttonDelete_Click(object sender, EventArgs e)
+        private void buttonCancel_Click(object sender, EventArgs e)
         {
-            if (dataGridView.SelectedRows.Count == 1)
-            {
-                int ingredientId = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
-                logicS.DeleteIngredient(id, ingredientId);
-                LoadData();
-            }
-        }
-
-        private void buttonRef_Click(object sender, EventArgs e)
-        {
-            LoadData();
+            DialogResult = DialogResult.Cancel;
+            Close();
         }
     }
 }

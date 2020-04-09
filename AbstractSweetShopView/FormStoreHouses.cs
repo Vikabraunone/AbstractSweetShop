@@ -46,20 +46,9 @@ namespace AbstractSweetShopView
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormCreateStoreHouse>();
+            var form = Container.Resolve<FormCreateOrUpdateStoreHouse>();
             if (form.ShowDialog() == DialogResult.OK)
                 LoadData();
-        }
-
-        private void buttonUpdate_Click(object sender, EventArgs e)
-        {
-            if (dataGridView.SelectedRows.Count == 1)
-            {
-                var form = Container.Resolve<FormStoreHouse>();
-                form.Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
-                if (form.ShowDialog() == DialogResult.OK)
-                    LoadData();
-            }
         }
 
         private void buttonRef_Click(object sender, EventArgs e)
@@ -85,6 +74,29 @@ namespace AbstractSweetShopView
                     }
                     LoadData();
                 }
+            }
+        }
+
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            if (dataGridView.SelectedRows.Count == 1)
+            {
+                var form = Container.Resolve<FormCreateOrUpdateStoreHouse>();
+                form.Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
+                if (form.ShowDialog() == DialogResult.OK)
+                    LoadData();
+            }
+        }
+
+
+        private void buttonViewIngredients_Click(object sender, EventArgs e)
+        {
+            if (dataGridView.SelectedRows.Count == 1)
+            {
+                var form = Container.Resolve<FormStoreHouse>();
+                form.Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
+                if (form.ShowDialog() == DialogResult.OK)
+                    LoadData();
             }
         }
     }

@@ -29,8 +29,7 @@
         private void InitializeComponent()
         {
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.buttonDelete = new System.Windows.Forms.Button();
-            this.buttonRef = new System.Windows.Forms.Button();
+            this.buttonCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,33 +44,22 @@
             this.dataGridView.Size = new System.Drawing.Size(311, 193);
             this.dataGridView.TabIndex = 0;
             // 
-            // buttonDelete
+            // buttonCancel
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(343, 64);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(107, 36);
-            this.buttonDelete.TabIndex = 2;
-            this.buttonDelete.Text = "Удалить";
-            this.buttonDelete.UseVisualStyleBackColor = true;
-            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
-            // 
-            // buttonRef
-            // 
-            this.buttonRef.Location = new System.Drawing.Point(343, 22);
-            this.buttonRef.Name = "buttonRef";
-            this.buttonRef.Size = new System.Drawing.Size(107, 36);
-            this.buttonRef.TabIndex = 3;
-            this.buttonRef.Text = "Обновить";
-            this.buttonRef.UseVisualStyleBackColor = true;
-            this.buttonRef.Click += new System.EventHandler(this.buttonRef_Click);
+            this.buttonCancel.Location = new System.Drawing.Point(213, 218);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(101, 25);
+            this.buttonCancel.TabIndex = 1;
+            this.buttonCancel.Text = "Отмена";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // FormStoreHouse
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(462, 232);
-            this.Controls.Add(this.buttonRef);
-            this.Controls.Add(this.buttonDelete);
+            this.ClientSize = new System.Drawing.Size(348, 254);
+            this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.dataGridView);
             this.Name = "FormStoreHouse";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -85,7 +73,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.Button buttonDelete;
-        private System.Windows.Forms.Button buttonRef;
+        private System.Windows.Forms.Button buttonCancel;
     }
 }

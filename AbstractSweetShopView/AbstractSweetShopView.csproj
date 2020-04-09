@@ -58,11 +58,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormCreateStoreHouse.cs">
+    <Compile Include="FormCreateOrUpdateStoreHouse.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormCreateStoreHouse.Designer.cs">
-      <DependentUpon>FormCreateStoreHouse.cs</DependentUpon>
+    <Compile Include="FormCreateOrUpdateStoreHouse.Designer.cs">
+      <DependentUpon>FormCreateOrUpdateStoreHouse.cs</DependentUpon>
     </Compile>
     <Compile Include="FormIngredient.cs">
       <SubType>Form</SubType>
@@ -126,8 +126,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormCreateStoreHouse.resx">
-      <DependentUpon>FormCreateStoreHouse.cs</DependentUpon>
+    <EmbeddedResource Include="FormCreateOrUpdateStoreHouse.resx">
+      <DependentUpon>FormCreateOrUpdateStoreHouse.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormIngredient.resx">
       <DependentUpon>FormIngredient.cs</DependentUpon>
