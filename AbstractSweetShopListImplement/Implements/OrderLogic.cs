@@ -38,13 +38,6 @@ namespace AbstractSweetShopListImplement.Implements
 
         public void Delete(OrderBindingModel model)
         {
-            // удаляем записи по ингредиентам и изделиям при удалении заказа
-            for (int i = 0; i < source.ProductIngredients.Count; ++i)
-                if (source.ProductIngredients[i].ProductId == model.Id)
-                    source.ProductIngredients.RemoveAt(i--);
-            for (int i = 0; i < source.Products.Count; ++i)
-                if (source.Products[i].Id == model.Id)
-                    source.Products.RemoveAt(i--);
             for (int i = 0; i < source.Products.Count; ++i)
                 if (source.Orders[i].Id == model.Id)
                 {
