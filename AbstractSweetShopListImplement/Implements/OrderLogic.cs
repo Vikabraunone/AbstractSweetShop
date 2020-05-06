@@ -79,7 +79,7 @@ namespace AbstractSweetShopListImplement.Implements
 
         private OrderViewModel CreateViewModel(Order order)
         {
-            string productName = "";
+            string productName = string.Empty;
             foreach (var product in source.Products)
                 if (product.Id == order.ProductId)
                     productName = product.ProductName;
