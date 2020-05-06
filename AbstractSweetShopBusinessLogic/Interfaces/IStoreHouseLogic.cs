@@ -15,7 +15,5 @@ namespace AbstractSweetShopBusinessLogic.Interfaces
         void AddIngredient(StoreHouseIngredientBindingModel model);
 
         StoreHouseViewModel ReadStoreHouse(int id);
-
-        void DeleteIngredient(int? storeHouseId, int? ingredientId);
     }
 }

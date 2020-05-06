@@ -83,6 +83,7 @@
             this.Name = "FormCreateOrUpdateStoreHouse";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Склад";
+            this.Load += new System.EventHandler(this.FormCreateOrUpdateStoreHouse_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -84,7 +84,7 @@ namespace AbstractSweetShopListImplement.Implements
             }
             source.StoreHouseIngredients.Add(new StoreHouseIngredient
             {
-                Id = model.Id,
+                Id = source.StoreHouseIngredients.Count + 1,
                 IngredientId = model.IngredientId,
                 StoreHouseId = model.StoreHouseId,
                 Count = model.Count
@@ -151,16 +151,6 @@ namespace AbstractSweetShopListImplement.Implements
                 StoreHouseName = storeHouseName,
                 StoreHouseIngredients = ingredients
             };
-        }
-
-        public void DeleteIngredient(int? storeHouseId, int? ingredientId)
-        {
-            foreach (var si in source.StoreHouseIngredients)
-                if (si.StoreHouseId == storeHouseId && si.IngredientId == ingredientId)
-                {
-                    source.StoreHouseIngredients.Remove(si);
-                    return;
-                }
         }
     }
 }

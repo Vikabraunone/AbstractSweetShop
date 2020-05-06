@@ -52,5 +52,15 @@ namespace AbstractSweetShopView
             DialogResult = DialogResult.Cancel;
             Close();
         }
+
+        private void FormCreateOrUpdateStoreHouse_Load(object sender, EventArgs e)
+        {
+            if (id.HasValue)
+            {
+                var storeHouse = logic.Read(new StoreHouseBindingModel { Id = id })?[0];
+                if (storeHouse != null)
+                    textBoxStoreHouseName.Text = storeHouse.StoreHouseName;
+            }
+        }
     }
 }
