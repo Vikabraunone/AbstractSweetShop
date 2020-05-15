@@ -11,7 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbstractSweetShopListImplem
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbstractSweetShopFileImplement", "AbstractSweetShopFileImplement\AbstractSweetShopFileImplement.csproj", "{5724C244-9010-44C6-B5B5-9040AF0B0A08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractSweetShopDatabaseImplement", "AbstractSweetShopDatabaseImplement\AbstractSweetShopDatabaseImplement.csproj", "{B38669E1-D415-444F-AB20-053717E76106}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbstractSweetShopDatabaseImplement", "AbstractSweetShopDatabaseImplement\AbstractSweetShopDatabaseImplement.csproj", "{B38669E1-D415-444F-AB20-053717E76106}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractSweetShopRestApi", "AbstractSweetShopRestApi\AbstractSweetShopRestApi.csproj", "{4D35B90B-B18B-4FEF-8CA6-8C97B1AEB6F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractSweetShopClientView", "AbstractSweetShopClientView\AbstractSweetShopClientView.csproj", "{B91B3D09-3D6F-4524-A9AA-E6D3BC282299}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{B38669E1-D415-444F-AB20-053717E76106}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B38669E1-D415-444F-AB20-053717E76106}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B38669E1-D415-444F-AB20-053717E76106}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D35B90B-B18B-4FEF-8CA6-8C97B1AEB6F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D35B90B-B18B-4FEF-8CA6-8C97B1AEB6F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D35B90B-B18B-4FEF-8CA6-8C97B1AEB6F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D35B90B-B18B-4FEF-8CA6-8C97B1AEB6F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B91B3D09-3D6F-4524-A9AA-E6D3BC282299}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B91B3D09-3D6F-4524-A9AA-E6D3BC282299}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B91B3D09-3D6F-4524-A9AA-E6D3BC282299}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B91B3D09-3D6F-4524-A9AA-E6D3BC282299}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

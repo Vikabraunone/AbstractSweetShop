@@ -53,12 +53,14 @@ namespace AbstractSweetShopView
                     dataGridView.DataSource = list;
                     dataGridView.Columns[0].Visible = false;
                     dataGridView.Columns[1].Visible = false;
-                    dataGridView.Columns[2].Width = 90;
-                    dataGridView.Columns[3].Width = 80;
-                    dataGridView.Columns[4].Width = 50;
-                    dataGridView.Columns[5].Width = 90;
-                    dataGridView.Columns[6].Width = 110;
-                    dataGridView.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView.Columns[2].Width = 200;
+                    dataGridView.Columns[3].Visible = false;
+                    dataGridView.Columns[4].Width = 150;
+                    dataGridView.Columns[5].Width = 80;
+                    dataGridView.Columns[6].Width = 50;
+                    dataGridView.Columns[7].Width = 90;
+                    dataGridView.Columns[8].Width = 110;
+                    dataGridView.Columns[9].Width = 110;
                 }
             }
             catch (Exception ex)
@@ -153,6 +155,13 @@ namespace AbstractSweetShopView
         {
             var form = Container.Resolve<FormReportProductIngredient>();
             form.ShowDialog();
+        }
+
+        private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormClients>();
+            form.ShowDialog();
+            LoadData();
         }
     }
 }

@@ -15,12 +15,15 @@ namespace AbstractSweetShopListImplement
 
         public List<ProductIngredient> ProductIngredients { get; set; }
 
+        public List<Client> Clients { get; set; }
+
         private DataListSingleton()
         {
             Ingredients = new List<Ingredient>();
             Orders = new List<Order>();
             Products = new List<Product>();
             ProductIngredients = new List<ProductIngredient>();
+            Clients = new List<Client>();
         }
 
         public static DataListSingleton GetInstance()
