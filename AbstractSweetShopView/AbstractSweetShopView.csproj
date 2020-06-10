@@ -151,8 +151,12 @@
       <Project>{b80b83b4-167a-4b14-b9b7-9554f2110253}</Project>
       <Name>AbstractSweetShopBusinessLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AbstractSweetShopFileImplement\AbstractSweetShopFileImplement.csproj">
+      <Project>{5724c244-9010-44c6-b5b5-9040af0b0a08}</Project>
+      <Name>AbstractSweetShopFileImplement</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AbstractSweetShopListImplement\AbstractSweetShopListImplement.csproj">
-      <Project>{769CCD10-C3A6-4E45-9DC4-46B99C0B75E7}</Project>
+      <Project>{769ccd10-c3a6-4e45-9dc4-46b99c0b75e7}</Project>
       <Name>AbstractSweetShopListImplement</Name>
     </ProjectReference>
   </ItemGroup>
