@@ -105,7 +105,7 @@ namespace AbstractSweetShopDatabaseImplement.Implements
         {
             using (var context = new AbstractSweetShopDatabase())
             {
-                var con = context.Products
+                return context.Products
                     .Where(rec => model == null || rec.Id == model.Id)
                     .ToList()
                     .Select(rec => new ProductViewModel
@@ -120,7 +120,6 @@ namespace AbstractSweetShopDatabaseImplement.Implements
                         (recPC.Ingredient?.IngredientName, recPC.Count))
                     })
                     .ToList();
-                return con;
             }
         }
     }
