@@ -126,5 +126,17 @@ namespace AbstractSweetShopView
         {
             LoadData();
         }
+
+        private void пополнитьСкладToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormAppendStoreHouse>();
+            form.ShowDialog();
+        }
+
+        private void складыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormStoreHouses>();
+            form.ShowDialog();
+        }
     }
 }
