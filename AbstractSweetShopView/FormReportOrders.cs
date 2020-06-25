@@ -1,7 +1,6 @@
 ﻿using AbstractSweetShopBusinessLogic.BindingModels;
 using AbstractSweetShopBusinessLogic.BusinessLogics;
 using System;
-using System.Linq;
 using System.Windows.Forms;
 using Unity;
 
@@ -21,10 +20,9 @@ namespace AbstractSweetShopView
             dataGridView.Columns.Add("DateCreate", "Дата создания");
             dataGridView.Columns.Add("ProductName", "Кондитерское изделие");
             dataGridView.Columns.Add("Sum", "Сумма");
-            dataGridView.Columns[0].Width = 250;
+            dataGridView.Columns[0].Width = 150;
             dataGridView.Columns[1].Width = 250;
-            dataGridView.Columns[2].Width = 250;
-            textBoxResult.Text = "0";
+            dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void buttonForm_Click(object sender, EventArgs e)
@@ -44,30 +42,21 @@ namespace AbstractSweetShopView
                 if (dataSource.Count != 0)
                 {
                     dataGridView.Rows.Clear();
-                    string shortDate = dataSource[0].DateCreate.ToShortDateString();
-                    decimal? sum = 0;
-                    // вставка строки для первой даты
-                    dataGridView.Rows.Add(new object[] { shortDate, string.Empty, string.Empty });
-                    for (int i = 0; i < dataSource.Count; i++)
+                    foreach (var group in dataSource)
                     {
-                        if (dataSource[i].DateCreate.ToShortDateString().Equals(shortDate))
+                        decimal sum = 0;
+                        // вставка даты
+                        dataGridView.Rows.Add(new object[] { group.Key.ToShortDateString(),
+                            string.Empty, string.Empty });
+                        foreach (var order in group)
                         {
-                            sum += dataSource[i].Sum;
-                            dataGridView.Rows.Add(new object[] { string.Empty, dataSource[i].ProductName, dataSource[i].Sum });
+                            dataGridView.Rows.Add(new object[] { string.Empty, order.ProductName,
+                                order.Sum });
+                            sum += order.Sum;
                         }
-                        else
-                        {
-                            dataGridView.Rows.Add(new object[] { "Итого:", string.Empty, sum });
-                            sum = 0;
-                            shortDate = dataSource[i].DateCreate.Date.ToShortDateString();
-                            dataGridView.Rows.Add(new object[] { shortDate, string.Empty, string.Empty });
-                            dataGridView.Rows.Add(new object[] { string.Empty, dataSource[i].ProductName, dataSource[i].Sum });
-                            sum += dataSource[i].Sum;
-                        }
+                        // вставка итоговой строки
+                        dataGridView.Rows.Add(new object[] { "Итого:", string.Empty, sum });
                     }
-                    // вставка итоговой строки для последней даты
-                    dataGridView.Rows.Add(new object[] { "Итого:", string.Empty, sum });
-                    textBoxResult.Text = (dataSource.Sum(x => x.Sum)).ToString();
                 }
             }
             catch (Exception ex)
