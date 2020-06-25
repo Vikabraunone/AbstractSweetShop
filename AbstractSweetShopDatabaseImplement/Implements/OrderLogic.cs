@@ -62,6 +62,7 @@ namespace AbstractSweetShopDatabaseImplement.Implements
                         rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo
                         || rec.ClientId == model.ClientId)
                     .Include(rec => rec.Product)
+                    .Include(rec => rec.Client)
                     .Select(rec => new OrderViewModel
                     {
                         Id = rec.Id,
