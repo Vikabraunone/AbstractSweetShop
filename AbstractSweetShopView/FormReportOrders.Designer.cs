@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBoxResult = new System.Windows.Forms.TextBox();
-            this.textBoxTextResult = new System.Windows.Forms.TextBox();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.panelMenu = new System.Windows.Forms.Panel();
             this.buttonToExcel = new System.Windows.Forms.Button();
@@ -41,28 +39,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.panelMenu.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // textBoxResult
-            // 
-            this.textBoxResult.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxResult.Location = new System.Drawing.Point(575, 377);
-            this.textBoxResult.Name = "textBoxResult";
-            this.textBoxResult.ReadOnly = true;
-            this.textBoxResult.Size = new System.Drawing.Size(94, 15);
-            this.textBoxResult.TabIndex = 7;
-            // 
-            // textBoxTextResult
-            // 
-            this.textBoxTextResult.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxTextResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxTextResult.Location = new System.Drawing.Point(475, 377);
-            this.textBoxTextResult.Name = "textBoxTextResult";
-            this.textBoxTextResult.ReadOnly = true;
-            this.textBoxTextResult.Size = new System.Drawing.Size(94, 15);
-            this.textBoxTextResult.TabIndex = 6;
-            this.textBoxTextResult.Text = "Итого:";
-            this.textBoxTextResult.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // dataGridView
             // 
@@ -148,25 +124,19 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(736, 444);
-            this.Controls.Add(this.textBoxResult);
-            this.Controls.Add(this.textBoxTextResult);
+            this.ClientSize = new System.Drawing.Size(736, 359);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.panelMenu);
             this.Name = "FormReportOrders";
-            this.Text = "FormReportOrders";
+            this.Text = "Отчет по заказам за период";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.panelMenu.ResumeLayout(false);
             this.panelMenu.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox textBoxResult;
-        private System.Windows.Forms.TextBox textBoxTextResult;
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Panel panelMenu;
         private System.Windows.Forms.Button buttonToExcel;

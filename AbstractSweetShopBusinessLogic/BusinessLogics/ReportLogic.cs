@@ -2,6 +2,7 @@
 using AbstractSweetShopBusinessLogic.HelperModels;
 using AbstractSweetShopBusinessLogic.Interfaces;
 using AbstractSweetShopBusinessLogic.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,6 +13,7 @@ namespace AbstractSweetShopBusinessLogic.BusinessLogics
         private readonly IProductLogic productLogic;
 
         private readonly IOrderLogic orderLogic;
+
         public ReportLogic(IProductLogic productLogic, IOrderLogic orderLogic)
         {
             this.productLogic = productLogic;
@@ -47,18 +49,11 @@ namespace AbstractSweetShopBusinessLogic.BusinessLogics
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public List<ReportOrdersViewModel> GetOrders(ReportBindingModel model)
+        public List<IGrouping<DateTime, OrderViewModel>> GetOrders(ReportBindingModel model)
         {
             var orders = orderLogic.Read(new OrderBindingModel { DateFrom = model.DateFrom, DateTo = model.DateTo });
             return orders
-                .Select(x => new ReportOrdersViewModel
-                {
-                    DateCreate = x.DateCreate,
-                    ProductName = x.ProductName,
-                    Count = x.Count,
-                    Sum = x.Sum,
-                    Status = x.Status
-                })
+                .GroupBy(x => x.DateCreate.Date)
                 .ToList();
         }
 
