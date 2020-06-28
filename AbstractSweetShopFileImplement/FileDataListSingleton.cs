@@ -85,6 +85,7 @@ namespace AbstractSweetShopFileImplement
                     list.Add(new Order
                     {
                         Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        ClientId = Convert.ToInt32(elem.Attribute("ClientId").Value),
                         ProductId = Convert.ToInt32(elem.Element("ProductId").Value),
                         Count = Convert.ToInt32(elem.Element("Count").Value),
                         Sum = Convert.ToDecimal(elem.Element("Sum").Value),
@@ -176,6 +177,7 @@ namespace AbstractSweetShopFileImplement
                 foreach (var order in Orders)
                     xElement.Add(new XElement("Order",
                         new XAttribute("Id", order.Id),
+                        new XElement("ClientId", order.ClientId),
                         new XElement("ProductId", order.ProductId),
                         new XElement("Count", order.Count),
                         new XElement("Sum", order.Sum),
