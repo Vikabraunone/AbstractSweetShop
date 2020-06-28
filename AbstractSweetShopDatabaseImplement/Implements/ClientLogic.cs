@@ -55,8 +55,9 @@ namespace AbstractSweetShopDatabaseImplement.Implements
         {
             using (var context = new AbstractSweetShopDatabase())
             {
-                var con = context.Clients
-                .Where(rec => model == null || rec.Email.Equals(model.Email) && rec.Password.Equals(model.Password))
+                var result = context.Clients
+                .Where(rec => model == null || rec.Email.Equals(model.Email) && rec.Password.Equals(model.Password)
+                || rec.Id == model.Id)
                 .Select(rec => new ClientViewModel
                 {
                     Id = rec.Id,
@@ -65,8 +66,10 @@ namespace AbstractSweetShopDatabaseImplement.Implements
                     Password = rec.Password
                 })
                 .ToList();
-                if (con.Count() == 0) return null;
-                return con;
+                if (result.Count() == 0)
+                    return null;
+                else
+                    return result;
             }
         }
     }

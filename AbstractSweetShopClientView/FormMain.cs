@@ -55,5 +55,11 @@ namespace AbstractSweetShopClientView
         {
             LoadList();
         }
+
+        private void GetMailToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new FormMessages();
+            form.ShowDialog();
+        }
     }
 }
