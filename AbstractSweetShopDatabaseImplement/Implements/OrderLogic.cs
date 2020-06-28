@@ -60,12 +60,12 @@ namespace AbstractSweetShopDatabaseImplement.Implements
             using (var context = new AbstractSweetShopDatabase())
             {
                 return context.Orders
-                    .Where(rec => model == null || rec.Id == model.Id ||
-                        rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo
-                        || rec.ClientId == model.ClientId
-                        || model.FreeOrders.HasValue && model.FreeOrders.Value && !rec.ImplementerId.HasValue
-                        || model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId
-                        && rec.Status == OrderStatus.Выполняется)
+                    .Where(rec => model == null || model.Id.HasValue && rec.Id == model.Id.Value
+                    || model.DateFrom.HasValue && model.DateTo.HasValue
+                    && rec.DateCreate >= model.DateFrom.Value && rec.DateCreate <= model.DateTo.Value
+                    || model.ClientId.HasValue && rec.ClientId == model.ClientId
+                    || model.FreeOrders.HasValue && model.FreeOrders.Value && !rec.ImplementerId.HasValue
+                    || model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId.Value && rec.Status == OrderStatus.Выполняется)
                     .Include(rec => rec.Product)
                     .Include(rec => rec.Client)
                     .Include(rec => rec.Implementer)

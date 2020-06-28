@@ -1,4 +1,5 @@
 ﻿using AbstractSweetShopBusinessLogic.BindingModels;
+using AbstractSweetShopBusinessLogic.Enums;
 using AbstractSweetShopBusinessLogic.Interfaces;
 using AbstractSweetShopBusinessLogic.ViewModels;
 using AbstractSweetShopListImplement.Models;
@@ -54,7 +55,11 @@ namespace AbstractSweetShopListImplement.Implements
             {
                 if (model != null)
                 {
-                    if (order.Id == model.Id)
+                    if (model.Id.HasValue && order.Id == model.Id.Value || model.DateFrom.HasValue && model.DateTo.HasValue
+                        && order.DateCreate >= model.DateFrom.Value && order.DateCreate <= model.DateTo.Value
+                        || model.ClientId.HasValue && order.ClientId == model.ClientId.Value
+                        || model.FreeOrders.HasValue && model.FreeOrders.Value && !order.ImplementerId.HasValue
+                        || model.ImplementerId.HasValue && order.ImplementerId == model.ImplementerId.Value && order.Status == OrderStatus.Выполняется)
                     {
                         result.Add(CreateViewModel(order));
                         break;

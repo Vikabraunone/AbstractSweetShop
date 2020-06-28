@@ -32,6 +32,7 @@ namespace AbstractSweetShopView
             currentContainer.RegisterType<IImplementerLogic, ImplementerLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<MainLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ReportLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<WorkModeling>(new HierarchicalLifetimeManager());
             return currentContainer;
         }
     }

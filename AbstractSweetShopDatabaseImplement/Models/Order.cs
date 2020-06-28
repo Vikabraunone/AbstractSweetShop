@@ -12,7 +12,7 @@ namespace AbstractSweetShopDatabaseImplement.Models
         public int Id { get; set; }
 
         [Required]
-        public int ClientId { get; set; }
+        public int? ClientId { get; set; }
 
         public int ProductId { get; set; }
 
