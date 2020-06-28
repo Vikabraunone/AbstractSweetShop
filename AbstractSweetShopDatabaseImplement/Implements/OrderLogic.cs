@@ -57,8 +57,9 @@ namespace AbstractSweetShopDatabaseImplement.Implements
             using (var context = new AbstractSweetShopDatabase())
             {
                 return context.Orders
-                    .Where(rec => model == null || rec.Id == model.Id ||
-                        rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
+                    .Where(rec => model == null || model.Id.HasValue && rec.Id == model.Id.Value ||
+                        model.DateFrom.HasValue && model.DateTo.HasValue &&
+                        rec.DateCreate >= model.DateFrom.Value && rec.DateCreate <= model.DateTo.Value)
                     .Include(rec => rec.Product)
                     .Select(rec => new OrderViewModel
                     {

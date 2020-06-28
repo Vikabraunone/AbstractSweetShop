@@ -54,7 +54,8 @@ namespace AbstractSweetShopListImplement.Implements
             {
                 if (model != null)
                 {
-                    if (order.Id == model.Id)
+                    if (model.Id.HasValue && order.Id == model.Id.Value || model.DateFrom.HasValue && model.DateTo.HasValue
+                        && order.DateCreate >= model.DateFrom.Value && order.DateCreate <= model.DateTo.Value)
                     {
                         result.Add(CreateViewModel(order));
                         break;
