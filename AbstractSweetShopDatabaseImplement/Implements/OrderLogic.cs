@@ -27,7 +27,8 @@ namespace AbstractSweetShopDatabaseImplement.Implements
                     element = new Order();
                     context.Orders.Add(element);
                 }
-                element.ProductId = model.ProductId == 0 ? element.ProductId : model.ProductId;
+                element.ClientId = model.ClientId.Value;
+                element.ProductId = model.ProductId;
                 element.Count = model.Count;
                 element.Sum = model.Sum;
                 element.Status = model.Status;
@@ -58,14 +59,19 @@ namespace AbstractSweetShopDatabaseImplement.Implements
             {
                 return context.Orders
                     .Where(rec => model == null || rec.Id == model.Id ||
-                        rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
+                        rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo
+                        || rec.ClientId == model.ClientId)
                     .Include(rec => rec.Product)
+                    .Include(rec => rec.Client)
                     .Select(rec => new OrderViewModel
                     {
                         Id = rec.Id,
+                        ClientId = rec.ClientId,
+                        ClientFIO = rec.Client.ClientFIO,
                         Count = rec.Count,
                         Sum = rec.Sum,
                         Status = rec.Status,
+                        ProductId = rec.ProductId,
                         ProductName = rec.Product.ProductName,
                         DateCreate = rec.DateCreate,
                         DateImplement = rec.DateImplement

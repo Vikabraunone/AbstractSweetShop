@@ -21,5 +21,7 @@ namespace AbstractSweetShopDatabaseImplement
         public virtual DbSet<ProductIngredient> ProductIngredients { set; get; }
 
         public virtual DbSet<Order> Orders { set; get; }
+
+        public virtual DbSet<Client> Clients { set; get; }
     }
 }

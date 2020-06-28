@@ -10,6 +10,8 @@ namespace AbstractSweetShopBusinessLogic.BindingModels
     {
         public int? Id { get; set; }
 
+        public int? ClientId { get; set; }
+
         public int ProductId { get; set; }
 
         public int Count { get; set; }
@@ -22,8 +24,8 @@ namespace AbstractSweetShopBusinessLogic.BindingModels
 
         public DateTime? DateImplement { get; set; }
 
-        public DateTime DateFrom { get; set; }
+        public DateTime? DateFrom { get; set; }
 
-        public DateTime DateTo { get; set; }
+        public DateTime? DateTo { get; set; }
     }
 }

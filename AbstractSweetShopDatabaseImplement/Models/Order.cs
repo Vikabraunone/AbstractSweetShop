@@ -11,6 +11,9 @@ namespace AbstractSweetShopDatabaseImplement.Models
     {
         public int Id { get; set; }
 
+        [Required]
+        public int ClientId { get; set; }
+
         public int ProductId { get; set; }
 
         [Required]
@@ -28,5 +31,7 @@ namespace AbstractSweetShopDatabaseImplement.Models
         public DateTime? DateImplement { get; set; }
 
         public virtual Product Product { get; set; }
+
+        public virtual Client Client { get; set; }
     }
 }

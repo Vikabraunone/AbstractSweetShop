@@ -32,7 +32,8 @@ namespace AbstractSweetShopFileImplement.Implements
                 element = new Order { Id = maxId + 1 };
                 source.Orders.Add(element);
             }
-            element.ProductId = model.ProductId == 0 ? element.ProductId : model.ProductId;
+            element.ClientId = model.ClientId;
+            element.ProductId = model.ProductId;
             element.Count = model.Count;
             element.Sum = model.Sum;
             element.Status = model.Status;
@@ -51,17 +52,23 @@ namespace AbstractSweetShopFileImplement.Implements
 
         public List<OrderViewModel> Read(OrderBindingModel model)
         {
-            return source.Orders.Where(rec => model == null || rec.Id == model.Id)
+            return source.Orders
+                .Where(rec => model == null || rec.Id == model.Id && model.Id.HasValue
+                    || model.DateFrom.HasValue && model.DateTo.HasValue
+                    && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo
+                    || model.ClientId.HasValue && rec.ClientId == model.ClientId)
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
+                    ProductId = rec.ProductId,
+                    ClientId = rec.ClientId,
+                    DateCreate = rec.DateCreate,
+                    DateImplement = rec.DateImplement,
+                    Status = rec.Status,
                     Count = rec.Count,
                     Sum = rec.Sum,
-                    Status = rec.Status,
-                    ProductId = rec.ProductId,
-                    ProductName = source.Products.FirstOrDefault(rec1 => rec.ProductId == rec1.Id)?.ProductName,
-                    DateCreate = rec.DateCreate,
-                    DateImplement = rec.DateImplement
+                    ClientFIO = source.Clients.FirstOrDefault(recC => recC.Id == rec.ClientId)?.ClientFIO,
+                    ProductName = source.Products.FirstOrDefault(recP => recP.Id == rec.ProductId)?.ProductName,
                 })
                 .ToList();
         }

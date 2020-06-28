@@ -68,6 +68,7 @@ namespace AbstractSweetShopListImplement.Implements
 
         private Order CreateModel(OrderBindingModel model, Order order)
         {
+            order.ClientId = model.ClientId;
             order.ProductId = model.ProductId;
             order.Sum = model.Sum;
             order.DateCreate = model.DateCreate;
@@ -82,10 +83,22 @@ namespace AbstractSweetShopListImplement.Implements
             string productName = string.Empty;
             foreach (var product in source.Products)
                 if (product.Id == order.ProductId)
+                {
                     productName = product.ProductName;
+                    break;
+                }
+            string clientFIO = string.Empty;
+            foreach (var client in source.Clients)
+                if (client.Id == order.ClientId)
+                {
+                    clientFIO = client.ClientFIO;
+                    break;
+                }
             return new OrderViewModel
             {
                 Id = order.Id,
+                ClientId = order.ClientId,
+                ClientFIO = clientFIO,
                 ProductId = order.ProductId,
                 Count = order.Count,
                 Sum = order.Sum,
