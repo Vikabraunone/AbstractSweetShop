@@ -10,6 +10,8 @@ namespace AbstractSweetShopBusinessLogic.BusinessLogics
     {
         private readonly IOrderLogic orderLogic;
 
+        private readonly object locker = new object();
+
         public MainLogic(IOrderLogic orderLogic)
         {
             this.orderLogic = orderLogic;
@@ -30,22 +32,28 @@ namespace AbstractSweetShopBusinessLogic.BusinessLogics
 
         public void TakeOrderInWork(ChangeStatusBindingModel model)
         {
-            var order = orderLogic.Read(new OrderBindingModel { Id = model.OrderId })?[0];
-            if (order == null)
-                throw new Exception("Не найден заказ");
-            if (order.Status != OrderStatus.Принят)
-                throw new Exception("Заказ не в статусе \"Принят\"");
-            orderLogic.CreateOrUpdate(new OrderBindingModel
+            lock (locker)
             {
-                Id = order.Id,
-                ClientId = order.ClientId,
-                ProductId = order.ProductId,
-                Count = order.Count,
-                Sum = order.Sum,
-                DateCreate = order.DateCreate,
-                DateImplement = DateTime.Now,
-                Status = OrderStatus.Выполняется
-            });
+                var order = orderLogic.Read(new OrderBindingModel { Id = model.OrderId })?[0];
+                if (order == null)
+                    throw new Exception("Не найден заказ");
+                if (order.Status != OrderStatus.Принят)
+                    throw new Exception("Заказ не в статусе \"Принят\"");
+                if (order.ImplementerId.HasValue)
+                    throw new Exception("Заказ выполняется другим исполнителем");
+                orderLogic.CreateOrUpdate(new OrderBindingModel
+                {
+                    Id = order.Id,
+                    ClientId = order.ClientId,
+                    ProductId = order.ProductId,
+                    ImplementerId = model.ImplementerId,
+                    Count = order.Count,
+                    Sum = order.Sum,
+                    DateCreate = order.DateCreate,
+                    DateImplement = DateTime.Now,
+                    Status = OrderStatus.Выполняется
+                });
+            }
         }
 
         public void FinishOrder(ChangeStatusBindingModel model)
@@ -55,11 +63,14 @@ namespace AbstractSweetShopBusinessLogic.BusinessLogics
                 throw new Exception("Не найден заказ");
             if (order.Status != OrderStatus.Выполняется)
                 throw new Exception("Заказ не в статусе \"Выполняется\"");
+            if (order.ImplementerId != model.ImplementerId)
+                throw new Exception("Заказ выполняется другим исполнителем");
             orderLogic.CreateOrUpdate(new OrderBindingModel
             {
                 Id = order.Id,
                 ClientId = order.ClientId,
                 ProductId = order.ProductId,
+                ImplementerId = model.ImplementerId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
@@ -80,6 +91,7 @@ namespace AbstractSweetShopBusinessLogic.BusinessLogics
                 Id = order.Id,
                 ClientId = order.ClientId,
                 ProductId = order.ProductId,
+                ImplementerId = order.ImplementerId,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,

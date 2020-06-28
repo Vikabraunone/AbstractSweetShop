@@ -70,6 +70,7 @@ namespace AbstractSweetShopListImplement.Implements
         {
             order.ClientId = model.ClientId;
             order.ProductId = model.ProductId;
+            order.ImplementerId = model.ImplementerId;
             order.Sum = model.Sum;
             order.DateCreate = model.DateCreate;
             order.Count = model.Count;
@@ -94,16 +95,25 @@ namespace AbstractSweetShopListImplement.Implements
                     clientFIO = client.ClientFIO;
                     break;
                 }
+            string implementerFIO = string.Empty;
+            foreach (var implementer in source.Implementers)
+                if (implementer.Id == order.ImplementerId)
+                {
+                    implementerFIO = implementer.ImplementerFIO;
+                    break;
+                }
             return new OrderViewModel
             {
                 Id = order.Id,
                 ClientId = order.ClientId,
                 ClientFIO = clientFIO,
                 ProductId = order.ProductId,
+                ProductName = productName,
+                ImplementerId = order.ImplementerId,
+                ImplementerFIO = implementerFIO,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,
-                ProductName = productName,
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement
             };

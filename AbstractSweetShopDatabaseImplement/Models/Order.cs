@@ -16,6 +16,8 @@ namespace AbstractSweetShopDatabaseImplement.Models
 
         public int ProductId { get; set; }
 
+        public int? ImplementerId { get; set; }
+
         [Required]
         public int Count { get; set; }
 
@@ -33,5 +35,7 @@ namespace AbstractSweetShopDatabaseImplement.Models
         public virtual Product Product { get; set; }
 
         public virtual Client Client { get; set; }
+
+        public virtual Implementer Implementer { get; set; }
     }
 }
