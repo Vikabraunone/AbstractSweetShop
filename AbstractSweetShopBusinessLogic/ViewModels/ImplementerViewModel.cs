@@ -1,18 +1,20 @@
-﻿using System.ComponentModel;
+﻿using AbstractSweetShopBusinessLogic.Attributes;
+using System.Collections.Generic;
 
 namespace AbstractSweetShopBusinessLogic.ViewModels
 {
-    public class ImplementerViewModel
+    public class ImplementerViewModel : BaseViewModel
     {
-        public int Id { get; set; }
-
-        [DisplayName("ФИО исполнителя")]
+        [Column(title: "ФИО исполнителя", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string ImplementerFIO { get; set; }
 
-        [DisplayName("Время на заказ")]
+        [Column(title: "Время работы", gridViewAutoSize: GridViewAutoSize.AllCells)]
         public int WorkingTime { get; set; }
 
-        [DisplayName("Время на перерыв")]
+        [Column(title: "Перерыв", gridViewAutoSize: GridViewAutoSize.AllCells)]
         public int PauseTime { get; set; }
+
+        public override List<string> Properties() => new List<string> { "Id", "ImplementerFIO", "WorkingTime",
+            "PauseTime"};
     }
 }
