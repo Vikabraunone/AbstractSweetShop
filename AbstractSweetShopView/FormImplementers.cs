@@ -33,10 +33,9 @@ namespace AbstractSweetShopView
                 {
                     dataGridView.DataSource = list;
                     dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[2].Visible = false;
-                    dataGridView.Columns[3].Visible = false;
-                    // ФИО исполнителя
                     dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView.Columns[2].Width = 100;
+                    dataGridView.Columns[3].Width = 100;
                 }
             }
             catch (Exception ex)
