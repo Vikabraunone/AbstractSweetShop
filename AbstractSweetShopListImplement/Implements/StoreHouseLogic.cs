@@ -4,6 +4,7 @@ using AbstractSweetShopBusinessLogic.ViewModels;
 using AbstractSweetShopListImplement.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AbstractSweetShopListImplement.Implements
 {
@@ -151,6 +152,41 @@ namespace AbstractSweetShopListImplement.Implements
                 StoreHouseName = storeHouseName,
                 StoreHouseIngredients = ingredients
             };
+        }
+
+        public bool IsIngredientsAvailable(int productId, int countProduct)
+        {
+            var productIngredients = source.ProductIngredients.Where(rec => rec.ProductId == productId);
+            if (productIngredients.Count() == 0) return false;
+            foreach (var pi in productIngredients)
+            {
+                var storeHouseIngredient = source.StoreHouseIngredients.Where(rec => rec.IngredientId == pi.IngredientId);
+                if (storeHouseIngredient.Sum(rec => rec.Count) < countProduct * pi.Count)
+                    return false;
+            }
+            return true;
+        }
+
+        public void SubtractIngredients(int productId, int countProduct)
+        {
+            var productIngredients = source.ProductIngredients.Where(rec => rec.ProductId == productId);
+            if (productIngredients.Count() == 0)
+                throw new Exception("Ингредиентов недостаточно для выполнения заказа");
+            foreach (var pi in productIngredients)
+            {
+                var storeHouseIngredient = source.StoreHouseIngredients.Where(rec => rec.IngredientId == pi.IngredientId);
+                int ingredientCount = countProduct * pi.Count;
+                foreach (var si in storeHouseIngredient)
+                {
+                    while (ingredientCount != 0 && si.Count > 0)
+                    {
+                        ingredientCount--;
+                        si.Count--;
+                    }
+                    if (ingredientCount == 0)
+                        break;
+                }
+            }
         }
     }
 }

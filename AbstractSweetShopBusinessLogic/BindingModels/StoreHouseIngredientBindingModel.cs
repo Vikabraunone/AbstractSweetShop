@@ -2,7 +2,7 @@
 {
     public class StoreHouseIngredientBindingModel
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         public int StoreHouseId { get; set; }
 

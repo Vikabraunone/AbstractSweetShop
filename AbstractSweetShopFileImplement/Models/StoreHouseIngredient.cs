@@ -1,8 +1,8 @@
-﻿namespace AbstractSweetShopListImplement.Models
+﻿namespace AbstractSweetShopFileImplement.Models
 {
     public class StoreHouseIngredient
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         public int StoreHouseId { get; set; }
 

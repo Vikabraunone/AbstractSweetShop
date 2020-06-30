@@ -1,6 +1,8 @@
 ﻿using AbstractSweetShopBusinessLogic.BindingModels;
 using AbstractSweetShopBusinessLogic.Interfaces;
+using AbstractSweetShopBusinessLogic.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using Unity;
 
@@ -32,11 +34,20 @@ namespace AbstractSweetShopView
             }
             try
             {
-                logic.CreateOrUpdate(new StoreHouseBindingModel
-                {
-                    Id = id,
-                    StoreHouseName = textBoxStoreHouseName.Text
-                });
+                StoreHouseViewModel view = logic.Read(new StoreHouseBindingModel { Id = id.Value })?[0];
+                if (view != null)
+                    logic.CreateOrUpdate(new StoreHouseBindingModel
+                    {
+                        Id = id,
+                        StoreHouseName = textBoxStoreHouseName.Text,
+                        StoreHouseIngredients = view.StoreHouseIngredients
+                    });
+                else
+                    logic.CreateOrUpdate(new StoreHouseBindingModel
+                    {
+                        StoreHouseName = textBoxStoreHouseName.Text,
+                        StoreHouseIngredients = new Dictionary<int, (string, int)>()
+                    });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;
                 Close();
