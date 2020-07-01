@@ -5,14 +5,16 @@ using System;
 
 namespace AbstractSweetShopBusinessLogic.BusinessLogics
 {
-    // Создание заказа и смена его статусов
     public class MainLogic
     {
         private readonly IOrderLogic orderLogic;
 
-        public MainLogic(IOrderLogic orderLogic)
+        private readonly IStoreHouseLogic storeHouseLogic;
+
+        public MainLogic(IOrderLogic orderLogic, IStoreHouseLogic storeHouseLogic)
         {
             this.orderLogic = orderLogic;
+            this.storeHouseLogic = storeHouseLogic;
         }
 
         public void CreateOrder(CreateOrderBindingModel model)
@@ -34,16 +36,22 @@ namespace AbstractSweetShopBusinessLogic.BusinessLogics
                 throw new Exception("Не найден заказ");
             if (order.Status != OrderStatus.Принят)
                 throw new Exception("Заказ не в статусе \"Принят\"");
-            orderLogic.CreateOrUpdate(new OrderBindingModel
+            if (storeHouseLogic.IsIngredientsAvailable(order.ProductId, order.Count))
             {
-                Id = order.Id,
-                ProductId = order.ProductId,
-                Count = order.Count,
-                Sum = order.Sum,
-                DateCreate = order.DateCreate,
-                DateImplement = DateTime.Now,
-                Status = OrderStatus.Выполняется
-            });
+                storeHouseLogic.SubtractIngredients(order.ProductId, order.Count);
+                orderLogic.CreateOrUpdate(new OrderBindingModel
+                {
+                    Id = order.Id,
+                    ProductId = order.ProductId,
+                    Count = order.Count,
+                    Sum = order.Sum,
+                    DateCreate = order.DateCreate,
+                    DateImplement = DateTime.Now,
+                    Status = OrderStatus.Выполняется
+                });
+            }
+            else
+                throw new Exception("Для выполнения заказа не хватает ингредиентов");
         }
 
         public void FinishOrder(ChangeStatusBindingModel model)
@@ -82,6 +90,11 @@ namespace AbstractSweetShopBusinessLogic.BusinessLogics
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Оплачен
             });
+        }
+
+        public void AddIngredientInStoreHouse(StoreHouseIngredientBindingModel model)
+        {
+            storeHouseLogic.AddIngredient(model);
         }
     }
 }

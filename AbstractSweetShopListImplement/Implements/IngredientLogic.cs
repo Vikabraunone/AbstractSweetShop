@@ -52,18 +52,18 @@ namespace AbstractSweetShopListImplement.Implements
         public List<IngredientViewModel> Read(IngredientBindingModel model)
         {
             List<IngredientViewModel> result = new List<IngredientViewModel>();
-            foreach (var component in source.Ingredients)
+            foreach (var ingredient in source.Ingredients)
             {
                 if (model != null)
                 {
-                    if (component.Id == model.Id)
+                    if (ingredient.Id == model.Id)
                     {
-                        result.Add(CreateViewModel(component));
+                        result.Add(CreateViewModel(ingredient));
                         break;
                     }
                     continue;
                 }
-                result.Add(CreateViewModel(component));
+                result.Add(CreateViewModel(ingredient));
             }
             return result;
         }
