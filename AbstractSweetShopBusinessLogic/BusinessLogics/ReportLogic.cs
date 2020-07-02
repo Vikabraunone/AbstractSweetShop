@@ -91,7 +91,7 @@ namespace AbstractSweetShopBusinessLogic.BusinessLogics
         /// Сохранение кондитерских изделий c расшифровкой по ингредиентам в файл-Pdf
         /// </summary>
         /// <param name="model"></param>
-        public void SaveProductComponentToPdfFile(ReportBindingModel model)
+        public void SaveProductIngredientToPdfFile(ReportBindingModel model)
         {
             SaveToPdf.CreateDoc(new PdfInfo
             {
