@@ -51,7 +51,9 @@ namespace AbstractSweetShopFileImplement.Implements
 
         public List<OrderViewModel> Read(OrderBindingModel model)
         {
-            return source.Orders.Where(rec => model == null || rec.Id == model.Id)
+            return source.Orders.Where(rec => model == null || model.Id.HasValue && rec.Id == model.Id.Value
+                || model.DateFrom.HasValue && model.DateTo.HasValue &&
+                rec.DateCreate >= model.DateFrom.Value && rec.DateCreate <= model.DateTo.Value)
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,

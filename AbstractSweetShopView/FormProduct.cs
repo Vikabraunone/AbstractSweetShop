@@ -25,7 +25,7 @@ namespace AbstractSweetShopView
         {
             InitializeComponent();
             logic = service;
-            dataGridView.Columns.Add("Id", "Id");
+            dataGridView.Columns.Add("Ingredients", "Ингредиенты");
             dataGridView.Columns.Add("Ingredients", "Ингредиенты");
             dataGridView.Columns.Add("Count", "Количество");
             dataGridView.Columns[0].Visible = false;

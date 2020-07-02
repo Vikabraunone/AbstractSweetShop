@@ -16,11 +16,14 @@ namespace AbstractSweetShopView
 
         private readonly IOrderLogic orderLogic;
 
-        public FormMain(MainLogic logic, IOrderLogic orderLogic)
+        private ReportLogic reportLogic;
+
+        public FormMain(MainLogic logic, IOrderLogic orderLogic, ReportLogic report)
         {
             InitializeComponent();
             this.logic = logic;
             this.orderLogic = orderLogic;
+            this.reportLogic = report;
         }
 
         private void ингредиентыToolStripMenuItem_Click(object sender, EventArgs e)
@@ -60,6 +63,7 @@ namespace AbstractSweetShopView
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.InnerException.Message);
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -125,6 +129,30 @@ namespace AbstractSweetShopView
         private void buttonOrderRef_Click(object sender, EventArgs e)
         {
             LoadData();
+        }
+
+        private void productToWordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    reportLogic.SaveProductsToWord(new ReportBindingModel { FileName = dialog.FileName });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void ordersToExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportOrders>();
+            form.ShowDialog();
+        }
+
+        private void productIngredientToPdfToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportProductIngredient>();
+            form.ShowDialog();
         }
     }
 }

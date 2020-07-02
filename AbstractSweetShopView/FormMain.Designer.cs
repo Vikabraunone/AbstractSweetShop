@@ -32,6 +32,10 @@
             this.справочникиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ингредиентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.кондитерскиеИзделияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.отчетыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.productToWordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ordersToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.productIngredientToPdfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.buttonCreateOrder = new System.Windows.Forms.Button();
             this.buttonTakeOrderInWork = new System.Windows.Forms.Button();
@@ -45,7 +49,8 @@
             // menuStrip
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.справочникиToolStripMenuItem});
+            this.справочникиToolStripMenuItem,
+            this.отчетыToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(777, 24);
@@ -74,6 +79,37 @@
             this.кондитерскиеИзделияToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
             this.кондитерскиеИзделияToolStripMenuItem.Text = "Кондитерские изделия";
             this.кондитерскиеИзделияToolStripMenuItem.Click += new System.EventHandler(this.кондитерскиеИзделияToolStripMenuItem_Click);
+            // 
+            // отчетыToolStripMenuItem
+            // 
+            this.отчетыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.productToWordToolStripMenuItem,
+            this.ordersToExcelToolStripMenuItem,
+            this.productIngredientToPdfToolStripMenuItem});
+            this.отчетыToolStripMenuItem.Name = "отчетыToolStripMenuItem";
+            this.отчетыToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.отчетыToolStripMenuItem.Text = "Отчеты";
+            // 
+            // productToWordToolStripMenuItem
+            // 
+            this.productToWordToolStripMenuItem.Name = "productToWordToolStripMenuItem";
+            this.productToWordToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
+            this.productToWordToolStripMenuItem.Text = "Список кондитерских изделий";
+            this.productToWordToolStripMenuItem.Click += new System.EventHandler(this.productToWordToolStripMenuItem_Click);
+            // 
+            // ordersToExcelToolStripMenuItem
+            // 
+            this.ordersToExcelToolStripMenuItem.Name = "ordersToExcelToolStripMenuItem";
+            this.ordersToExcelToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
+            this.ordersToExcelToolStripMenuItem.Text = "Список заказов";
+            this.ordersToExcelToolStripMenuItem.Click += new System.EventHandler(this.ordersToExcelToolStripMenuItem_Click);
+            // 
+            // productIngredientToPdfToolStripMenuItem
+            // 
+            this.productIngredientToPdfToolStripMenuItem.Name = "productIngredientToPdfToolStripMenuItem";
+            this.productIngredientToPdfToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
+            this.productIngredientToPdfToolStripMenuItem.Text = "Кондитерские изделия по ингредиентам";
+            this.productIngredientToPdfToolStripMenuItem.Click += new System.EventHandler(this.productIngredientToPdfToolStripMenuItem_Click);
             // 
             // dataGridView
             // 
@@ -178,5 +214,9 @@
         private System.Windows.Forms.Button buttonOrderRef;
         private System.Windows.Forms.ToolStripMenuItem ингредиентыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem кондитерскиеИзделияToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem отчетыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem productToWordToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ordersToExcelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem productIngredientToPdfToolStripMenuItem;
     }
 }
