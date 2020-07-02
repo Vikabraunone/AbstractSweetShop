@@ -4,18 +4,20 @@ using AbstractSweetShopDatabaseImplement;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AbstractSweetShopDatabaseImplement.Migrations
 {
     [DbContext(typeof(AbstractSweetShopDatabase))]
-    partial class AbstractSweetShopDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20200701163531_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.2")
+                .HasAnnotation("ProductVersion", "3.1.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -110,7 +112,48 @@ namespace AbstractSweetShopDatabaseImplement.Migrations
 
                     b.ToTable("ProductIngredients");
                 });
-                
+
+            modelBuilder.Entity("AbstractSweetShopDatabaseImplement.Models.StoreHouse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("StoreHouseName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StoreHouses");
+                });
+
+            modelBuilder.Entity("AbstractSweetShopDatabaseImplement.Models.StoreHouseIngredient", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IngredientId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StoreHouseId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IngredientId");
+
+                    b.HasIndex("StoreHouseId");
+
+                    b.ToTable("StoreHouseIngredients");
+                });
+
             modelBuilder.Entity("AbstractSweetShopDatabaseImplement.Models.Order", b =>
                 {
                     b.HasOne("AbstractSweetShopDatabaseImplement.Models.Product", "Product")
@@ -131,6 +174,21 @@ namespace AbstractSweetShopDatabaseImplement.Migrations
                     b.HasOne("AbstractSweetShopDatabaseImplement.Models.Product", "Product")
                         .WithMany("ProductIngredients")
                         .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("AbstractSweetShopDatabaseImplement.Models.StoreHouseIngredient", b =>
+                {
+                    b.HasOne("AbstractSweetShopDatabaseImplement.Models.Ingredient", "Ingredient")
+                        .WithMany("StoreHouseIngredients")
+                        .HasForeignKey("IngredientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AbstractSweetShopDatabaseImplement.Models.StoreHouse", "StoreHouse")
+                        .WithMany("StoreHouseIngredients")
+                        .HasForeignKey("StoreHouseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

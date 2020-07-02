@@ -16,5 +16,8 @@ namespace AbstractSweetShopDatabaseImplement.Models
 
         [ForeignKey("IngredientId")]
         public virtual List<ProductIngredient> ProductIngredients { get; set; }
+
+        [ForeignKey("IngredientId")]
+        public virtual List<StoreHouseIngredient> StoreHouseIngredients { get; set; }
     }
 }

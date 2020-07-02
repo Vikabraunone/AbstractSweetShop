@@ -220,6 +220,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormCreateOrUpdateStoreHouse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCreateOrUpdateStoreHouse.Designer.cs">
+      <DependentUpon>FormCreateOrUpdateStoreHouse.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormIngredient.cs">
       <SubType>Form</SubType>
     </Compile>

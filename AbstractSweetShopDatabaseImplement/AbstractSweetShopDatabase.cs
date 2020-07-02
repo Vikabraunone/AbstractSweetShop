@@ -9,7 +9,7 @@ namespace AbstractSweetShopDatabaseImplement
         {
             if (optionsBuilder.IsConfigured == false)
             {
-                optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-2ACH9S6\SQLEXPRESS;Initial Catalog=AbstractSweetShopDatabase;Integrated Security=True;MultipleActiveResultSets=True;");
+                optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-2ACH9S6\SQLEXPRESS;Initial Catalog=AbstractSweetShopDatabaseHome;Integrated Security=True;MultipleActiveResultSets=True;");
             }
             base.OnConfiguring(optionsBuilder);
         }
@@ -21,5 +21,9 @@ namespace AbstractSweetShopDatabaseImplement
         public virtual DbSet<ProductIngredient> ProductIngredients { set; get; }
 
         public virtual DbSet<Order> Orders { set; get; }
+
+        public virtual DbSet<StoreHouse> StoreHouses { set; get; }
+
+        public virtual DbSet<StoreHouseIngredient> StoreHouseIngredients { set; get; }
     }
 }

@@ -20,6 +20,10 @@ namespace AbstractSweetShopFileImplement
 
         private readonly string ProductIngredientFileName = "ProductIngredient.xml";
 
+        private readonly string StoreHouseFileName = "StoreHouse.xml";
+
+        private readonly string StoreHouseIngredientFileName = "StoreHouseIngredient.xml";
+
         public List<Ingredient> Ingredients { get; set; }
 
         public List<Order> Orders { get; set; }
@@ -28,12 +32,18 @@ namespace AbstractSweetShopFileImplement
 
         public List<ProductIngredient> ProductIngredients { get; set; }
 
+        public List<StoreHouse> StoreHouses { get; set; }
+
+        public List<StoreHouseIngredient> StoreHouseIngredients { get; set; }
+
         private FileDataListSingleton()
         {
             Ingredients = LoadIngredients();
             Orders = LoadOrders();
             Products = LoadProducts();
             ProductIngredients = LoadProductIngredients();
+            StoreHouses = LoadStoreHouses();
+            StoreHouseIngredients = LoadStoreHouseIngredient();
         }
 
         public static FileDataListSingleton GetInstance()
@@ -49,6 +59,8 @@ namespace AbstractSweetShopFileImplement
             SaveOrders();
             SaveProducts();
             SaveProductIngredients();
+            SaveStoreHouses();
+            SaveStoreHouseIngredients();
         }
 
         private List<Ingredient> LoadIngredients()
@@ -127,6 +139,42 @@ namespace AbstractSweetShopFileImplement
             return list;
         }
 
+        private List<StoreHouseIngredient> LoadStoreHouseIngredient()
+        {
+            var list = new List<StoreHouseIngredient>();
+            if (File.Exists(StoreHouseIngredientFileName))
+            {
+                XDocument xDocument = XDocument.Load(StoreHouseIngredientFileName);
+                var xElements = xDocument.Root.Elements("StoreHouseIngredient").ToList();
+                foreach (var elem in xElements)
+                    list.Add(new StoreHouseIngredient
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        StoreHouseId = Convert.ToInt32(elem.Element("StoreHouseId").Value),
+                        IngredientId = Convert.ToInt32(elem.Element("IngredientId").Value),
+                        Count = Convert.ToInt32(elem.Element("Count").Value)
+                    });
+            }
+            return list;
+        }
+
+        private List<StoreHouse> LoadStoreHouses()
+        {
+            var list = new List<StoreHouse>();
+            if (File.Exists(StoreHouseFileName))
+            {
+                XDocument xDocument = XDocument.Load(StoreHouseFileName);
+                var xElements = xDocument.Root.Elements("StoreHouse").ToList();
+                foreach (var elem in xElements)
+                    list.Add(new StoreHouse
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        StoreHouseName = elem.Element("StoreHouseName").Value
+                    });
+            }
+            return list;
+        }
+
         private void SaveIngredients()
         {
             if (Ingredients != null)
@@ -189,6 +237,36 @@ namespace AbstractSweetShopFileImplement
                         new XElement("Count", productIngredient.Count)));
                 XDocument xDocument = new XDocument(xElement);
                 xDocument.Save(ProductIngredientFileName);
+            }
+        }
+
+        private void SaveStoreHouseIngredients()
+        {
+            if (StoreHouseIngredients != null)
+            {
+                var xElement = new XElement("StoreHouseIngredients");
+                foreach (var storeHouseIngredient in StoreHouseIngredients)
+                    xElement.Add(new XElement("StoreHouseIngredient",
+                        new XAttribute("Id", storeHouseIngredient.Id),
+                        new XElement("StoreHouseId", storeHouseIngredient.StoreHouseId),
+                        new XElement("IngredientId", storeHouseIngredient.IngredientId),
+                        new XElement("Count", storeHouseIngredient.Count)));
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(StoreHouseIngredientFileName);
+            }
+        }
+
+        private void SaveStoreHouses()
+        {
+            if (StoreHouses != null)
+            {
+                var xElement = new XElement("StoreHouses");
+                foreach (var storeHouse in StoreHouses)
+                    xElement.Add(new XElement("StoreHouse",
+                        new XAttribute("Id", storeHouse.Id),
+                        new XElement("StoreHouseName", storeHouse.StoreHouseName)));
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(StoreHouseFileName);
             }
         }
     }
