@@ -62,6 +62,7 @@ namespace AbstractSweetShopDatabaseImplement.Implements
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
+                    ProductId = rec.ProductId,
                     Count = rec.Count,
                     Sum = rec.Sum,
                     Status = rec.Status,

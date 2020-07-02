@@ -1,5 +1,4 @@
-﻿using AbstractSweetShopBusinessLogic.BindingModels;
-using AbstractSweetShopBusinessLogic.Interfaces;
+﻿using AbstractSweetShopBusinessLogic.Interfaces;
 using AbstractSweetShopBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -44,7 +43,7 @@ namespace AbstractSweetShopView
             {
                 try
                 {
-                    StoreHouseViewModel view = logicS.Read(new StoreHouseBindingModel { Id = id.Value })?[0];
+                    StoreHouseViewModel view = logicS.ReadStoreHouse(id.Value);
                     if (view != null)
                     {
                         storeHouseIngredients = view.StoreHouseIngredients;
