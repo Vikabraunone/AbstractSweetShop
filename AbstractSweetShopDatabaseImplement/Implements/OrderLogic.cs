@@ -1,4 +1,5 @@
 ﻿using AbstractSweetShopBusinessLogic.BindingModels;
+using AbstractSweetShopBusinessLogic.Enums;
 using AbstractSweetShopBusinessLogic.Interfaces;
 using AbstractSweetShopBusinessLogic.ViewModels;
 using AbstractSweetShopDatabaseImplement.Models;
@@ -29,6 +30,7 @@ namespace AbstractSweetShopDatabaseImplement.Implements
                 }
                 element.ClientId = model.ClientId.Value;
                 element.ProductId = model.ProductId;
+                element.ImplementerId = model.ImplementerId;
                 element.Count = model.Count;
                 element.Sum = model.Sum;
                 element.Status = model.Status;
@@ -58,12 +60,15 @@ namespace AbstractSweetShopDatabaseImplement.Implements
             using (var context = new AbstractSweetShopDatabase())
             {
                 return context.Orders
-                    .Where(rec => model == null || model.Id.HasValue && rec.Id == model.Id.Value 
-                        || model.DateFrom.HasValue && model.DateTo.HasValue 
-                        && rec.DateCreate >= model.DateFrom.Value && rec.DateCreate <= model.DateTo.Value
-                        || model.ClientId.HasValue && rec.ClientId == model.ClientId.Value)
+                    .Where(rec => model == null || model.Id.HasValue && rec.Id == model.Id.Value
+                    || model.DateFrom.HasValue && model.DateTo.HasValue
+                    && rec.DateCreate >= model.DateFrom.Value && rec.DateCreate <= model.DateTo.Value
+                    || model.ClientId.HasValue && rec.ClientId == model.ClientId
+                    || model.FreeOrders.HasValue && model.FreeOrders.Value && !rec.ImplementerId.HasValue
+                    || model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId.Value && rec.Status == OrderStatus.Выполняется)
                     .Include(rec => rec.Product)
                     .Include(rec => rec.Client)
+                    .Include(rec => rec.Implementer)
                     .Select(rec => new OrderViewModel
                     {
                         Id = rec.Id,
@@ -75,7 +80,9 @@ namespace AbstractSweetShopDatabaseImplement.Implements
                         ProductId = rec.ProductId,
                         ProductName = rec.Product.ProductName,
                         DateCreate = rec.DateCreate,
-                        DateImplement = rec.DateImplement
+                        DateImplement = rec.DateImplement,
+                        ImplementerFIO = rec.ImplementerId.HasValue ? rec.Implementer.ImplementerFIO : string.Empty,
+                        ImplementerId = rec.ImplementerId
                     })
                     .ToList();
             }

@@ -28,6 +28,12 @@ namespace AbstractSweetShopBusinessLogic.ViewModels
         [DisplayName("Кондитерское изделие")]
         public string ProductName { get; set; }
 
+        public int? ImplementerId { get; set; }
+
+        [DataMember]
+        [DisplayName("Исполнитель")]
+        public string ImplementerFIO { get; set; }
+
         [DataMember]
         [DisplayName("Количество")]
         public int Count { get; set; }

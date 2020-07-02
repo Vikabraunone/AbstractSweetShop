@@ -1,4 +1,5 @@
 ﻿using AbstractSweetShopBusinessLogic.BindingModels;
+using AbstractSweetShopBusinessLogic.Enums;
 using AbstractSweetShopBusinessLogic.Interfaces;
 using AbstractSweetShopBusinessLogic.ViewModels;
 using AbstractSweetShopListImplement.Models;
@@ -56,7 +57,9 @@ namespace AbstractSweetShopListImplement.Implements
                 {
                     if (model.Id.HasValue && order.Id == model.Id.Value || model.DateFrom.HasValue && model.DateTo.HasValue
                         && order.DateCreate >= model.DateFrom.Value && order.DateCreate <= model.DateTo.Value
-                        || model.ClientId.HasValue && order.ClientId == model.ClientId.Value)
+                        || model.ClientId.HasValue && order.ClientId == model.ClientId.Value
+                        || model.FreeOrders.HasValue && model.FreeOrders.Value && !order.ImplementerId.HasValue
+                        || model.ImplementerId.HasValue && order.ImplementerId == model.ImplementerId.Value && order.Status == OrderStatus.Выполняется)
                     {
                         result.Add(CreateViewModel(order));
                         break;
@@ -72,6 +75,7 @@ namespace AbstractSweetShopListImplement.Implements
         {
             order.ClientId = model.ClientId;
             order.ProductId = model.ProductId;
+            order.ImplementerId = model.ImplementerId;
             order.Sum = model.Sum;
             order.DateCreate = model.DateCreate;
             order.Count = model.Count;
@@ -96,16 +100,25 @@ namespace AbstractSweetShopListImplement.Implements
                     clientFIO = client.ClientFIO;
                     break;
                 }
+            string implementerFIO = string.Empty;
+            foreach (var implementer in source.Implementers)
+                if (implementer.Id == order.ImplementerId)
+                {
+                    implementerFIO = implementer.ImplementerFIO;
+                    break;
+                }
             return new OrderViewModel
             {
                 Id = order.Id,
                 ClientId = order.ClientId,
                 ClientFIO = clientFIO,
                 ProductId = order.ProductId,
+                ProductName = productName,
+                ImplementerId = order.ImplementerId,
+                ImplementerFIO = implementerFIO,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,
-                ProductName = productName,
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement
             };

@@ -1,4 +1,5 @@
 ﻿using AbstractSweetShopBusinessLogic.BindingModels;
+using AbstractSweetShopBusinessLogic.Enums;
 using AbstractSweetShopBusinessLogic.Interfaces;
 using AbstractSweetShopBusinessLogic.ViewModels;
 using AbstractSweetShopFileImplement.Models;
@@ -54,9 +55,11 @@ namespace AbstractSweetShopFileImplement.Implements
         {
             return source.Orders
                 .Where(rec => model == null || model.Id.HasValue && rec.Id == model.Id.Value
-                        || model.DateFrom.HasValue && model.DateTo.HasValue 
-                        && rec.DateCreate >= model.DateFrom.Value && rec.DateCreate <= model.DateTo.Value
-                        || model.ClientId.HasValue && rec.ClientId == model.ClientId.Value)
+                    || model.DateFrom.HasValue && model.DateTo.HasValue
+                    && rec.DateCreate >= model.DateFrom.Value && rec.DateCreate <= model.DateTo.Value
+                    || model.ClientId.HasValue && rec.ClientId == model.ClientId
+                    || model.FreeOrders.HasValue && model.FreeOrders.Value && !rec.ImplementerId.HasValue
+                    || model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId.Value && rec.Status == OrderStatus.Выполняется)
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
