@@ -10,5 +10,7 @@ namespace AbstractSweetShopBusinessLogic.HelperModels
         public List<string> Texts { get; set; }
 
         public WordParagraphProperties TextProperties { get; set; }
+
+        public bool ParagraphIsCell { get; set; }
     }
 }

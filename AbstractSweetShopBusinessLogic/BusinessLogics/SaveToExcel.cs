@@ -8,7 +8,6 @@ using System.Linq;
 
 namespace AbstractSweetShopBusinessLogic.BusinessLogics
 {
-    // класс создания отчета в формате Excel
     static class SaveToExcel
     {
         public static void CreateDoc(ExcelInfo info)
@@ -45,113 +44,148 @@ namespace AbstractSweetShopBusinessLogic.BusinessLogics
                 };
                 sheets.Append(sheet);
 
-                InsertCellInWorksheet(new ExcelCellParameters
+                if (info.Orders != null)
                 {
-                    Worksheet = worksheetPart.Worksheet,
-                    ShareStringPart = shareStringPart,
-                    ColumnName = "A",
-                    RowIndex = 1,
-                    Text = info.Title,
-                    StyleIndex = 2U
-                });
-
-                MergeCells(new ExcelMergeParameters
-                {
-                    Worksheet = worksheetPart.Worksheet,
-                    CellFromName = "A1",
-                    CellToName = "D1"
-                });
-
-                InsertCellInWorksheet(new ExcelCellParameters
-                {
-                    Worksheet = worksheetPart.Worksheet,
-                    ShareStringPart = shareStringPart,
-                    ColumnName = "A",
-                    RowIndex = 2,
-                    Text = "C " + info.DateFrom.ToShortDateString() + " по " + info.DateTo.ToShortDateString(),
-                    StyleIndex = 2U
-                });
-
-                MergeCells(new ExcelMergeParameters
-                {
-                    Worksheet = worksheetPart.Worksheet,
-                    CellFromName = "A2",
-                    CellToName = "D2"
-                });
-
-                InsertCellInWorksheet(new ExcelCellParameters
-                {
-                    Worksheet = worksheetPart.Worksheet,
-                    ShareStringPart = shareStringPart,
-                    ColumnName = "A",
-                    RowIndex = 3,
-                    Text = "Дата заказа",
-                    StyleIndex = 2U
-                });
-
-                InsertCellInWorksheet(new ExcelCellParameters
-                {
-                    Worksheet = worksheetPart.Worksheet,
-                    ShareStringPart = shareStringPart,
-                    ColumnName = "B",
-                    RowIndex = 3,
-                    Text = "Кондитерское изделие",
-                    StyleIndex = 2U
-                });
-
-                InsertCellInWorksheet(new ExcelCellParameters
-                {
-                    Worksheet = worksheetPart.Worksheet,
-                    ShareStringPart = shareStringPart,
-                    ColumnName = "C",
-                    RowIndex = 3,
-                    Text = "Сумма",
-                    StyleIndex = 2U
-                });
-
-                uint rowIndex = 4;
-                foreach (var group in info.Orders)
-                {
-                    decimal sum = 0;
-                    // вставка первой строки с датой
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
                         Worksheet = worksheetPart.Worksheet,
                         ShareStringPart = shareStringPart,
                         ColumnName = "A",
-                        RowIndex = rowIndex,
-                        Text = group.Key.ToShortDateString(),
-                        StyleIndex = 1U
+                        RowIndex = 1,
+                        Text = info.Title,
+                        StyleIndex = 2U
                     });
-                    // форматируем соседние ячейки
+
+                    MergeCells(new ExcelMergeParameters
+                    {
+                        Worksheet = worksheetPart.Worksheet,
+                        CellFromName = "A1",
+                        CellToName = "D1"
+                    });
+
+                    InsertCellInWorksheet(new ExcelCellParameters
+                    {
+                        Worksheet = worksheetPart.Worksheet,
+                        ShareStringPart = shareStringPart,
+                        ColumnName = "A",
+                        RowIndex = 2,
+                        Text = "C " + info.DateFrom.ToShortDateString() + " по " + info.DateTo.ToShortDateString(),
+                        StyleIndex = 2U
+                    });
+
+                    MergeCells(new ExcelMergeParameters
+                    {
+                        Worksheet = worksheetPart.Worksheet,
+                        CellFromName = "A2",
+                        CellToName = "D2"
+                    });
+
+                    InsertCellInWorksheet(new ExcelCellParameters
+                    {
+                        Worksheet = worksheetPart.Worksheet,
+                        ShareStringPart = shareStringPart,
+                        ColumnName = "A",
+                        RowIndex = 3,
+                        Text = "Дата заказа",
+                        StyleIndex = 2U
+                    });
+
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
                         Worksheet = worksheetPart.Worksheet,
                         ShareStringPart = shareStringPart,
                         ColumnName = "B",
-                        RowIndex = rowIndex,
-                        Text = string.Empty,
-                        StyleIndex = 1U
+                        RowIndex = 3,
+                        Text = "Кондитерское изделие",
+                        StyleIndex = 2U
                     });
+
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
                         Worksheet = worksheetPart.Worksheet,
                         ShareStringPart = shareStringPart,
                         ColumnName = "C",
-                        RowIndex = rowIndex,
-                        Text = string.Empty,
-                        StyleIndex = 1U
+                        RowIndex = 3,
+                        Text = "Сумма",
+                        StyleIndex = 2U
                     });
-                    rowIndex++;
-                    foreach (var order in group)
+
+                    uint rowIndex = 4;
+                    foreach (var group in info.Orders)
                     {
+                        decimal sum = 0;
+                        // вставка первой строки с датой
                         InsertCellInWorksheet(new ExcelCellParameters
                         {
                             Worksheet = worksheetPart.Worksheet,
                             ShareStringPart = shareStringPart,
                             ColumnName = "A",
                             RowIndex = rowIndex,
+                            Text = group.Key.ToShortDateString(),
+                            StyleIndex = 1U
+                        });
+                        // форматируем соседние ячейки
+                        InsertCellInWorksheet(new ExcelCellParameters
+                        {
+                            Worksheet = worksheetPart.Worksheet,
+                            ShareStringPart = shareStringPart,
+                            ColumnName = "B",
+                            RowIndex = rowIndex,
                             Text = string.Empty,
+                            StyleIndex = 1U
+                        });
+                        InsertCellInWorksheet(new ExcelCellParameters
+                        {
+                            Worksheet = worksheetPart.Worksheet,
+                            ShareStringPart = shareStringPart,
+                            ColumnName = "C",
+                            RowIndex = rowIndex,
+                            Text = string.Empty,
+                            StyleIndex = 1U
+                        });
+                        rowIndex++;
+                        foreach (var order in group)
+                        {
+                            InsertCellInWorksheet(new ExcelCellParameters
+                            {
+                                Worksheet = worksheetPart.Worksheet,
+                                ShareStringPart = shareStringPart,
+                                ColumnName = "A",
+                                RowIndex = rowIndex,
+                                Text = string.Empty,
+                                StyleIndex = 1U
+                            });
+
+                            InsertCellInWorksheet(new ExcelCellParameters
+                            {
+                                Worksheet = worksheetPart.Worksheet,
+                                ShareStringPart = shareStringPart,
+                                ColumnName = "B",
+                                RowIndex = rowIndex,
+                                Text = order.ProductName,
+                                StyleIndex = 1U
+                            });
+
+                            InsertCellInWorksheet(new ExcelCellParameters
+                            {
+                                Worksheet = worksheetPart.Worksheet,
+                                ShareStringPart = shareStringPart,
+                                ColumnName = "C",
+                                RowIndex = rowIndex,
+                                Text = order.Sum.ToString(),
+                                StyleIndex = 1U
+                            });
+                            sum += order.Sum;
+                            rowIndex++;
+                        }
+                        // вставка итоговой строки
+                        InsertCellInWorksheet(new ExcelCellParameters
+                        {
+                            Worksheet = worksheetPart.Worksheet,
+                            ShareStringPart = shareStringPart,
+                            ColumnName = "A",
+                            RowIndex = rowIndex,
+                            Text = "Итого:",
                             StyleIndex = 1U
                         });
 
@@ -161,7 +195,62 @@ namespace AbstractSweetShopBusinessLogic.BusinessLogics
                             ShareStringPart = shareStringPart,
                             ColumnName = "B",
                             RowIndex = rowIndex,
-                            Text = order.ProductName,
+                            Text = string.Empty,
+                            StyleIndex = 1U
+                        });
+
+                        InsertCellInWorksheet(new ExcelCellParameters
+                        {
+                            Worksheet = worksheetPart.Worksheet,
+                            ShareStringPart = shareStringPart,
+                            ColumnName = "С",
+                            RowIndex = rowIndex,
+                            Text = sum.ToString(),
+                            StyleIndex = 1U
+                        });
+                        rowIndex++;
+                    }
+                }
+                else if (info.ReportStoreHouseIngredient != null)
+                {
+                    InsertCellInWorksheet(new ExcelCellParameters
+                    {
+                        Worksheet = worksheetPart.Worksheet,
+                        ShareStringPart = shareStringPart,
+                        ColumnName = "A",
+                        RowIndex = 1,
+                        Text = info.Title,
+                        StyleIndex = 2U
+                    });
+
+                    MergeCells(new ExcelMergeParameters
+                    {
+                        Worksheet = worksheetPart.Worksheet,
+                        CellFromName = "A1",
+                        CellToName = "C1"
+                    });
+
+                    uint rowIndex = 2;
+
+                    foreach (var storeHouse in info.ReportStoreHouseIngredient)
+                    {
+                        InsertCellInWorksheet(new ExcelCellParameters
+                        {
+                            Worksheet = worksheetPart.Worksheet,
+                            ShareStringPart = shareStringPart,
+                            ColumnName = "A",
+                            RowIndex = rowIndex,
+                            Text = storeHouse.StoreHouseName,
+                            StyleIndex = 1U
+                        });
+
+                        InsertCellInWorksheet(new ExcelCellParameters
+                        {
+                            Worksheet = worksheetPart.Worksheet,
+                            ShareStringPart = shareStringPart,
+                            ColumnName = "B",
+                            RowIndex = rowIndex,
+                            Text = storeHouse.IngredientName,
                             StyleIndex = 1U
                         });
 
@@ -171,22 +260,11 @@ namespace AbstractSweetShopBusinessLogic.BusinessLogics
                             ShareStringPart = shareStringPart,
                             ColumnName = "C",
                             RowIndex = rowIndex,
-                            Text = order.Sum.ToString(),
+                            Text = storeHouse.Count.ToString(),
                             StyleIndex = 1U
                         });
-                        sum += order.Sum;
                         rowIndex++;
                     }
-                    // вставка итоговой строки
-                    InsertCellInWorksheet(new ExcelCellParameters
-                    {
-                        Worksheet = worksheetPart.Worksheet,
-                        ShareStringPart = shareStringPart,
-                        ColumnName = "A",
-                        RowIndex = rowIndex,
-                        Text = "Итого:",
-                        StyleIndex = 1U
-                    });
 
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
@@ -194,20 +272,19 @@ namespace AbstractSweetShopBusinessLogic.BusinessLogics
                         ShareStringPart = shareStringPart,
                         ColumnName = "B",
                         RowIndex = rowIndex,
-                        Text = string.Empty,
-                        StyleIndex = 1U
+                        Text = "Общее количество:",
+                        StyleIndex = 0U
                     });
 
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
                         Worksheet = worksheetPart.Worksheet,
                         ShareStringPart = shareStringPart,
-                        ColumnName = "С",
+                        ColumnName = "C",
                         RowIndex = rowIndex,
-                        Text = sum.ToString(),
-                        StyleIndex = 1U
+                        Text = info.ReportStoreHouseIngredient.Sum(x => x.Count).ToString(),
+                        StyleIndex = 0U
                     });
-                    rowIndex++;
                 }
                 workbookpart.Workbook.Save();
             }

@@ -63,6 +63,7 @@
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(709, 45);
             this.panelMenu.TabIndex = 4;
+            this.panelMenu.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMenu_Paint);
             // 
             // buttonToExcel
             // 
@@ -137,6 +138,7 @@
         }
 
         #endregion
+
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Panel panelMenu;
         private System.Windows.Forms.Button buttonToExcel;

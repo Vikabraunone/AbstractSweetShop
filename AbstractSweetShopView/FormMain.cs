@@ -18,12 +18,12 @@ namespace AbstractSweetShopView
 
         private ReportLogic reportLogic;
 
-        public FormMain(MainLogic logic, IOrderLogic orderLogic, ReportLogic report)
+        public FormMain(MainLogic logic, IOrderLogic orderLogic, ReportLogic reportLogic)
         {
             InitializeComponent();
             this.logic = logic;
             this.orderLogic = orderLogic;
-            this.reportLogic = report;
+            this.reportLogic = reportLogic;
         }
 
         private void ингредиентыToolStripMenuItem_Click(object sender, EventArgs e)
@@ -63,7 +63,6 @@ namespace AbstractSweetShopView
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.InnerException.Message);
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -131,7 +130,19 @@ namespace AbstractSweetShopView
             LoadData();
         }
 
-        private void productToWordToolStripMenuItem_Click(object sender, EventArgs e)
+        private void пополнитьСкладToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormAppendStoreHouse>();
+            form.ShowDialog();
+        }
+
+        private void складыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormStoreHouses>();
+            form.ShowDialog();
+        }
+
+        private void списокКондитерскихИзделийToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
             {
@@ -143,25 +154,39 @@ namespace AbstractSweetShopView
             }
         }
 
-        private void ordersToExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        private void списокЗаказовToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormReportOrders>();
             form.ShowDialog();
         }
 
-        private void productIngredientToPdfToolStripMenuItem_Click(object sender, EventArgs e)
+        private void кондитерскиеИзделияПоИнгредиентамToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormReportProductIngredient>();
-            
-        private void пополнитьСкладToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var form = Container.Resolve<FormAppendStoreHouse>();
             form.ShowDialog();
         }
 
-        private void складыToolStripMenuItem_Click(object sender, EventArgs e)
+        private void списокСкладовToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormStoreHouses>();
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    reportLogic.SaveStoreHousesToWord(new ReportBindingModel { FileName = dialog.FileName });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void загруженностьСкладовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportStoreHouseIngredient>();
+            form.ShowDialog();
+        }
+
+        private void ингредиентыНаСкладахToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportIngredientStoreHouse>();
             form.ShowDialog();
         }
     }

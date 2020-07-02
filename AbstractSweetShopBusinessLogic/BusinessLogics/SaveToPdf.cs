@@ -26,45 +26,91 @@ namespace AbstractSweetShopBusinessLogic.BusinessLogics
             foreach (var elem in columns)
                 table.AddColumn(elem);
 
-            CreateRow(new PdfRowParameters
+            if (info.ProductIngredients != null)
             {
-                Table = table,
-                Texts = new List<string> { "Кондитерское изделие", "Ингредиент", "Количество" },
-                Style = "NormalTitle",
-                ParagraphAlignment = ParagraphAlignment.Center
-            });
-
-            foreach (var product in info.ProductIngredient)
-            {
-                if (product.ProductName == null)
+                CreateRow(new PdfRowParameters
                 {
-                    CreateRow(new PdfRowParameters
+                    Table = table,
+                    Texts = new List<string> { "Кондитерское изделие", "Ингредиент", "Количество" },
+                    Style = "NormalTitle",
+                    ParagraphAlignment = ParagraphAlignment.Center
+                });
+
+                foreach (var product in info.ProductIngredients)
+                {
+                    if (product.ProductName == null)
                     {
-                        Table = table,
-                        Texts = new List<string>
+                        CreateRow(new PdfRowParameters
+                        {
+                            Table = table,
+                            Texts = new List<string>
                         {
                             string.Empty,
                             product.IngredientName,
                             product.TotalCount.ToString()
                         },
-                        Style = "Normal",
-                        ParagraphAlignment = ParagraphAlignment.Left
-                    });
-                }
-                else
-                {
-                    CreateRow(new PdfRowParameters
+                            Style = "Normal",
+                            ParagraphAlignment = ParagraphAlignment.Left
+                        });
+                    }
+                    else
                     {
-                        Table = table,
-                        Texts = new List<string>
+                        CreateRow(new PdfRowParameters
+                        {
+                            Table = table,
+                            Texts = new List<string>
                         {
                             product.ProductName,
                             string.Empty,
                             string.Empty
                         },
-                        Style = "Normal",
-                        ParagraphAlignment = ParagraphAlignment.Left
-                    });
+                            Style = "Normal",
+                            ParagraphAlignment = ParagraphAlignment.Left
+                        });
+                    }
+                }
+            }
+            else if (info.ReportIngredientStoreHouse != null)
+            {
+                CreateRow(new PdfRowParameters
+                {
+                    Table = table,
+                    Texts = new List<string> { "Ингредиент", "Склад", "Количество" },
+                    Style = "NormalTitle",
+                    ParagraphAlignment = ParagraphAlignment.Center
+                });
+                foreach (var row in info.ReportIngredientStoreHouse)
+                {
+                    if (row.IngredientName == null)
+                    {
+                        CreateRow(new PdfRowParameters
+                        {
+                            Table = table,
+                            Texts = new List<string>
+                        {
+                            string.Empty,
+                            row.StoreHouseName,
+                            row.Count.ToString()
+                        },
+                            Style = "Normal",
+                            ParagraphAlignment = ParagraphAlignment.Left
+                        });
+                    }
+                    else
+                    {
+                        CreateRow(new PdfRowParameters
+                        {
+                            Table = table,
+                            Texts = new List<string>
+                        {
+                            row.IngredientName,
+                            string.Empty,
+                            string.Empty
+                        },
+                            Style = "Normal",
+                            ParagraphAlignment = ParagraphAlignment.Left
+                        });
+                    }
                 }
             }
             PdfDocumentRenderer renderer = new PdfDocumentRenderer(true, PdfSharp.Pdf.PdfFontEmbedding.Always)

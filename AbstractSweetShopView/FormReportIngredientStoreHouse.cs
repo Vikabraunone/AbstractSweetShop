@@ -7,25 +7,28 @@ using Unity;
 
 namespace AbstractSweetShopView
 {
-    public partial class FormReportProductIngredient : Form
+    /// <summary>
+    /// Ингредиенты по складам
+    /// </summary>
+    public partial class FormReportIngredientStoreHouse : Form
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
 
         private readonly ReportLogic logic;
 
-        public FormReportProductIngredient(ReportLogic logic)
+        public FormReportIngredientStoreHouse(ReportLogic logic)
         {
             InitializeComponent();
             this.logic = logic;
         }
 
-        private void FormReportProductIngredient_Load(object sender, EventArgs e)
+        private void FormReportIngredientStoreHouse_Load(object sender, EventArgs e)
         {
             try
             {
-                var dataSource = logic.GetProductIngredient();
-                ReportDataSource source = new ReportDataSource("DataSetPI", dataSource);
+                var dataSource = logic.GetIngredientStoreHouse();
+                ReportDataSource source = new ReportDataSource("DataSetIngredientStoreHouse", dataSource);
                 reportViewer.LocalReport.DataSources.Add(source);
                 reportViewer.RefreshReport();
             }
@@ -43,7 +46,7 @@ namespace AbstractSweetShopView
                 {
                     try
                     {
-                        logic.SaveProductIngredientToPdfFile(new ReportBindingModel
+                        logic.SaveIngredientStoreHouseToPdfFile(new ReportBindingModel
                         {
                             FileName = dialog.FileName
                         });

@@ -93,5 +93,10 @@ namespace AbstractSweetShopView
                 }
             }
         }
+
+        private void panelMenu_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

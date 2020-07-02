@@ -18,7 +18,7 @@ namespace AbstractSweetShopFileImplement
 
         private readonly string ProductFileName = "Product.xml";
 
-        private readonly string ProductIngredientFileName = "ProductIngredient.xml";
+        private readonly string ProductIngredientFileName = "ProductIngredients.xml";
 
         private readonly string StoreHouseFileName = "StoreHouse.xml";
 
@@ -126,7 +126,7 @@ namespace AbstractSweetShopFileImplement
             if (File.Exists(ProductIngredientFileName))
             {
                 XDocument xDocument = XDocument.Load(ProductIngredientFileName);
-                var xElements = xDocument.Root.Elements("ProductIngredient").ToList();
+                var xElements = xDocument.Root.Elements("ProductIngredients").ToList();
                 foreach (var elem in xElements)
                     list.Add(new ProductIngredient
                     {
@@ -230,7 +230,7 @@ namespace AbstractSweetShopFileImplement
             {
                 var xElement = new XElement("ProductIngredients");
                 foreach (var productIngredient in ProductIngredients)
-                    xElement.Add(new XElement("ProductIngredient",
+                    xElement.Add(new XElement("ProductIngredients",
                         new XAttribute("Id", productIngredient.Id),
                         new XElement("ProductId", productIngredient.ProductId),
                         new XElement("IngredientId", productIngredient.IngredientId),

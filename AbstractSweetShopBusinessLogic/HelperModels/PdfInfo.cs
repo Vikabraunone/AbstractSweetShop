@@ -9,6 +9,8 @@ namespace AbstractSweetShopBusinessLogic.HelperModels
 
         public string Title { get; set; }
 
-        public List<ReportProductIngredientViewModel> ProductIngredient { get; set; }
+        public List<ReportProductIngredientViewModel> ProductIngredients { get; set; }
+
+        public List<ReportStoreHouseIngredientViewModel> ReportIngredientStoreHouse { get; set; }
     }
 }

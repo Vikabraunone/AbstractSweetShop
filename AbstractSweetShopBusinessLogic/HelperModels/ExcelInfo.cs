@@ -16,5 +16,7 @@ namespace AbstractSweetShopBusinessLogic.HelperModels
         public DateTime DateTo { get; set; }
 
         public List<IGrouping<DateTime, OrderViewModel>> Orders { get; set; }
+
+        public List<ReportStoreHouseIngredientViewModel> ReportStoreHouseIngredient { get; set; }
     }
 }
