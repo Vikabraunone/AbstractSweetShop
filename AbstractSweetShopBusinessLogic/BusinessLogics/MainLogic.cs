@@ -19,6 +19,7 @@ namespace AbstractSweetShopBusinessLogic.BusinessLogics
         {
             orderLogic.CreateOrUpdate(new OrderBindingModel
             {
+                ClientId = model.ClientId,
                 ProductId = model.ProductId,
                 Count = model.Count,
                 Sum = model.Sum,
@@ -37,6 +38,7 @@ namespace AbstractSweetShopBusinessLogic.BusinessLogics
             orderLogic.CreateOrUpdate(new OrderBindingModel
             {
                 Id = order.Id,
+                ClientId = order.ClientId,
                 ProductId = order.ProductId,
                 Count = order.Count,
                 Sum = order.Sum,
@@ -56,6 +58,7 @@ namespace AbstractSweetShopBusinessLogic.BusinessLogics
             orderLogic.CreateOrUpdate(new OrderBindingModel
             {
                 Id = order.Id,
+                ClientId = order.ClientId,
                 ProductId = order.ProductId,
                 Count = order.Count,
                 Sum = order.Sum,
@@ -75,6 +78,7 @@ namespace AbstractSweetShopBusinessLogic.BusinessLogics
             orderLogic.CreateOrUpdate(new OrderBindingModel
             {
                 Id = order.Id,
+                ClientId = order.ClientId,
                 ProductId = order.ProductId,
                 Count = order.Count,
                 Sum = order.Sum,

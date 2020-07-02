@@ -16,11 +16,14 @@ namespace AbstractSweetShopView
 
         private readonly IProductLogic logicP;
 
+        private readonly IClientLogic logicC;
+
         private readonly MainLogic logicM;
 
-        public FormCreateOrder(IProductLogic logicP, MainLogic logicM)
+        public FormCreateOrder(IClientLogic logicC, IProductLogic logicP, MainLogic logicM)
         {
             InitializeComponent();
+            this.logicC = logicC;
             this.logicP = logicP;
             this.logicM = logicM;
         }
@@ -28,14 +31,22 @@ namespace AbstractSweetShopView
         private void FormCreateOrder_Load(object sender, EventArgs e)
         {
             try
-            { //  Логика загрузки списка компонент в выпадающий список
-                List<ProductViewModel> list = logicP.Read(null);
-                if (list != null)
+            { //  Логика загрузки списка кондитерских изделий в выпадающий список
+                List<ProductViewModel> listProducts = logicP.Read(null);
+                if (listProducts != null)
                 {
                     comboBoxProduct.DisplayMember = "ProductName";
                     comboBoxProduct.ValueMember = "Id";
-                    comboBoxProduct.DataSource = list;
+                    comboBoxProduct.DataSource = listProducts;
                     comboBoxProduct.SelectedItem = null;
+                }
+                List<ClientViewModel> listClients = logicC.Read(null);
+                if (listClients != null)
+                {
+                    comboBoxClient.DisplayMember = "ClientFIO";
+                    comboBoxClient.ValueMember = "Id";
+                    comboBoxClient.DataSource = listClients;
+                    comboBoxClient.SelectedItem = null;
                 }
             }
             catch (Exception ex)
@@ -82,7 +93,13 @@ namespace AbstractSweetShopView
             }
             if (comboBoxProduct.SelectedValue == null)
             {
-                MessageBox.Show("Выберите изделие", "Ошибка",
+                MessageBox.Show("Выберите кондитерское изделие", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (comboBoxClient.SelectedValue == null)
+            {
+                MessageBox.Show("Выберите клиента", "Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -90,6 +107,7 @@ namespace AbstractSweetShopView
             {
                 logicM.CreateOrder(new CreateOrderBindingModel
                 {
+                    ClientId = Convert.ToInt32(comboBoxClient.SelectedValue),
                     ProductId = Convert.ToInt32(comboBoxProduct.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),
                     Sum = Convert.ToDecimal(textBoxSum.Text)
