@@ -35,27 +35,6 @@ namespace AbstractSweetShopFileImplement.Implements
                 source.StoreHouses.Add(element);
             }
             element.StoreHouseName = model.StoreHouseName;
-            // удалили те, которых нет в модели
-            source.StoreHouseIngredients.RemoveAll(rec =>
-                rec.StoreHouseId == model.Id && !model.StoreHouseIngredients.ContainsKey(rec.IngredientId));
-            // обновили количество у существующих записей
-            var updateIngredients = source.StoreHouseIngredients.Where(rec =>
-                rec.StoreHouseId == model.Id && model.StoreHouseIngredients.ContainsKey(rec.IngredientId));
-            foreach (var updateIngredient in updateIngredients)
-            {
-                updateIngredient.Count = model.StoreHouseIngredients[updateIngredient.IngredientId].Item2;
-                model.StoreHouseIngredients.Remove(updateIngredient.IngredientId);
-            }
-            // добавили новые
-            int maxPIId = source.StoreHouseIngredients.Count > 0 ? source.StoreHouseIngredients.Max(rec => rec.Id) : 0;
-            foreach (var si in model.StoreHouseIngredients)
-                source.StoreHouseIngredients.Add(new StoreHouseIngredient
-                {
-                    Id = ++maxPIId,
-                    StoreHouseId = element.Id,
-                    IngredientId = si.Key,
-                    Count = si.Value.Item2
-                });
         }
 
         public List<StoreHouseViewModel> Read(StoreHouseBindingModel model)
