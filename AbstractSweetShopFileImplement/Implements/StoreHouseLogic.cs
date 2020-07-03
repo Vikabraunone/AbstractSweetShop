@@ -123,13 +123,13 @@ namespace AbstractSweetShopFileImplement.Implements
                 int ingredientCount = countProduct * pi.Count;
                 foreach (var si in storeHouseIngredient)
                 {
-                    while (ingredientCount != 0 && si.Count > 0)
+                    if (si.Count > ingredientCount)
                     {
-                        ingredientCount--;
-                        si.Count--;
-                    }
-                    if (ingredientCount == 0)
+                        si.Count -= ingredientCount;
                         break;
+                    }
+                    ingredientCount -= si.Count;
+                    si.Count = 0;
                 }
             }
         }
