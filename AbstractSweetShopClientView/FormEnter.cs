@@ -19,6 +19,11 @@ namespace AbstractSweetShopClientView
                 try
                 {
                     Program.Client = APIClient.GetRequest<ClientViewModel>($"api/client/login?login={textBoxEmail.Text}&password={textBoxPassword.Text}");
+                    if (Program.Client == null)
+                    {
+                        MessageBox.Show("Неверный логин/пароль", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                     Close();
                 }
                 catch (Exception ex)

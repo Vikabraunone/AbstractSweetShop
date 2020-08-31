@@ -33,6 +33,7 @@
             this.CreateOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.RefreshOrderListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.GetMailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -40,7 +41,7 @@
             // menuStrip
             //
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[]  { this.UpdateDataToolStripMenuItem,
-                this.CreateOrderToolStripMenuItem, this.RefreshOrderListToolStripMenuItem });
+                this.CreateOrderToolStripMenuItem, this.RefreshOrderListToolStripMenuItem, this.GetMailToolStripMenuItem });
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(621, 24);
@@ -67,6 +68,13 @@
             this.RefreshOrderListToolStripMenuItem.Size = new System.Drawing.Size(159, 20);
             this.RefreshOrderListToolStripMenuItem.Text = "Обновить список заказов";
             this.RefreshOrderListToolStripMenuItem.Click += new System.EventHandler(this.RefreshOrderListToolStripMenuItem_Click);
+            //
+            // GetMailToolStripMenuItem
+            //
+            this.GetMailToolStripMenuItem.Name = "GetMailToolStripMenuItem";
+            this.GetMailToolStripMenuItem.Size = new System.Drawing.Size(159, 20);
+            this.GetMailToolStripMenuItem.Text = "Показать письма";
+            this.GetMailToolStripMenuItem.Click += new System.EventHandler(this.GetMailToolStripMenuItem_Click);
             //
             // dataGridView
             //
@@ -106,6 +114,7 @@
         private System.Windows.Forms.ToolStripMenuItem UpdateDataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CreateOrderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RefreshOrderListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem GetMailToolStripMenuItem;
         private System.Windows.Forms.DataGridView dataGridView;
     }
 }
