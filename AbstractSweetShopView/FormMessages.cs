@@ -20,15 +20,18 @@ namespace AbstractSweetShopView
 
         private void FormMessages_Load(object sender, EventArgs e)
         {
-            var list = messageLogic.Read(null);
-            if (list != null)
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+            try
             {
-                dataGridView.DataSource = list;
-                dataGridView.Columns[0].Visible = false;
-                dataGridView.Columns[1].Width = 100;
-                dataGridView.Columns[2].Width = 100;
-                dataGridView.Columns[3].Width = 100;
-                dataGridView.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                Program.ConfigGrid(messageLogic.Read(null), dataGridView);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

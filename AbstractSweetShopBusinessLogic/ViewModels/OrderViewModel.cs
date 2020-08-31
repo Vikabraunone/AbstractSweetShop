@@ -24,6 +24,7 @@ namespace AbstractSweetShopBusinessLogic.ViewModels
         public int ProductId { get; set; }
 
         [Column(title: "Кондитерское изделие", gridViewAutoSize: GridViewAutoSize.Fill)]
+        [DisplayName("Кондитерское изделие")]
         [DataMember]
         public string ProductName { get; set; }
 
@@ -34,14 +35,17 @@ namespace AbstractSweetShopBusinessLogic.ViewModels
         public string ImplementerFIO { get; set; }
 
         [Column(title: "Количество", gridViewAutoSize: GridViewAutoSize.ColumnHeader)]
+        [DisplayName("Количество")]
         [DataMember]
         public int Count { get; set; }
 
         [Column(title: "Сумма", gridViewAutoSize: GridViewAutoSize.AllCells)]
+        [DisplayName("Сумма")]
         [DataMember]
         public decimal Sum { get; set; }
 
         [Column(title: "Статус", width: 100)]
+        [DisplayName("Статус")]
         [DataMember]
         public OrderStatus Status { get; set; }
 

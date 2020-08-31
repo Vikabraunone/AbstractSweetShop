@@ -17,14 +17,14 @@ namespace AbstractSweetShopClientView
         {
             try
             {
-                var source = APIClient.GetRequest<List<MessageInfoViewModel>>(
+                dataGridView.DataSource = APIClient.GetRequest<List<MessageInfoViewModel>>(
                         $"api/client/GetMessages?clientId={Program.Client.Id}");
-                dataGridView.DataSource = source;
                 dataGridView.Columns[0].Visible = false;
-                dataGridView.Columns[1].Width = 100;
-                dataGridView.Columns[2].Width = 100;
-                dataGridView.Columns[3].Width = 100;
+                dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dataGridView.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridView.Columns[5].Visible = false;
             }
             catch (Exception ex)
             {

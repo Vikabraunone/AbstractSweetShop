@@ -19,18 +19,18 @@ namespace AbstractSweetShopClientView
             {
                 dataGridView.DataSource = APIClient.GetRequest<List<OrderViewModel>>(
                         $"api/main/getorders?clientId={Program.Client.Id}");
-                dataGridView.Columns[0].Visible = false; // id
-                dataGridView.Columns[1].Visible = false; // id клиента
-                dataGridView.Columns[2].Visible = false; // фио клиента
-                dataGridView.Columns[3].Visible = false; // id изделия
-                dataGridView.Columns[4].Width = 200; // изделие
-                dataGridView.Columns[5].Visible = false; // id исполнителя
-                dataGridView.Columns[6].Visible = false; // фио исполнителя
-                dataGridView.Columns[7].Width = 100; // количество
-                dataGridView.Columns[8].Width = 100; // сумма
-                dataGridView.Columns[9].Width = 100; // статус заказа
-                dataGridView.Columns[10].Width = 100; // дата создания
-                dataGridView.Columns[11].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill; // дата выполнения
+                dataGridView.Columns[0].Visible = false;
+                dataGridView.Columns[1].Visible = false;
+                dataGridView.Columns[2].Visible = false;
+                dataGridView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridView.Columns[4].Visible = false;
+                dataGridView.Columns[5].Visible = false;
+                dataGridView.Columns[6].Width = 100;
+                dataGridView.Columns[7].Width = 100;
+                dataGridView.Columns[8].Width = 100;
+                dataGridView.Columns[9].Visible = false;
+                dataGridView.Columns[10].Visible = false;
+                dataGridView.Columns[11].Visible = false;
             }
             catch (Exception ex)
             {

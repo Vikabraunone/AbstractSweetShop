@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
+﻿using AbstractSweetShopBusinessLogic.Attributes;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace AbstractSweetShopBusinessLogic.ViewModels
@@ -8,20 +8,19 @@ namespace AbstractSweetShopBusinessLogic.ViewModels
     /// Изделие, изготавливаемое в кондитерской
     /// </summary>
     [DataContract]
-    public class ProductViewModel
+    public class ProductViewModel : BaseViewModel
     {
+        [Column(title: "Название кондитерского изделия", gridViewAutoSize: GridViewAutoSize.Fill)]
         [DataMember]
-        public int Id { get; set; }
-
-        [DataMember]
-        [DisplayName("Название кондитерского изделия")]
         public string ProductName { get; set; }
 
+        [Column(title: "Цена", gridViewAutoSize: GridViewAutoSize.AllCells)]
         [DataMember]
-        [DisplayName("Цена")]
         public decimal Price { get; set; }
 
         [DataMember]
         public Dictionary<int, (string, int)> ProductIngredients { get; set; }
+
+        public override List<string> Properties() => new List<string> { "Id", "ProductName", "Price" };
     }
 }
