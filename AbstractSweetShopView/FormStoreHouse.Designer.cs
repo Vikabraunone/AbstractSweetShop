@@ -39,17 +39,17 @@
             this.dataGridView.AllowUserToDeleteRows = false;
             this.dataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(21, 13);
+            this.dataGridView.Location = new System.Drawing.Point(12, 12);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(311, 193);
-            this.dataGridView.TabIndex = 0;
+            this.dataGridView.TabIndex = 4;
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(213, 218);
+            this.buttonCancel.Location = new System.Drawing.Point(212, 211);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(101, 25);
-            this.buttonCancel.TabIndex = 1;
+            this.buttonCancel.TabIndex = 5;
             this.buttonCancel.Text = "Отмена";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -58,7 +58,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(348, 254);
+            this.ClientSize = new System.Drawing.Size(330, 255);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.dataGridView);
             this.Name = "FormStoreHouse";
@@ -71,7 +71,6 @@
         }
 
         #endregion
-
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Button buttonCancel;
     }

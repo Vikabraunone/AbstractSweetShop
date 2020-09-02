@@ -13,10 +13,9 @@ namespace AbstractSweetShopView
 
         public int Id { set { id = value; } }
 
-        private int? id;
-
         private readonly IIngredientLogic logic;
 
+        private int? id;
 
         public FormIngredient(IIngredientLogic logic)
         {
