@@ -49,15 +49,7 @@ namespace AbstractSweetShopView
         {
             try
             {
-                var list = logic.Read(null);
-                if (list != null)
-                {
-                    dataGridView.DataSource = list;
-                    dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[3].Visible = false;
-                    dataGridView.Columns[1].Width = 300;
-                    dataGridView.Columns[2].Width = 200;
-                }
+                Program.ConfigGrid(logic.Read(null), dataGridView);
             }
             catch (Exception ex)
             {
