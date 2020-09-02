@@ -16,11 +16,20 @@ namespace AbstractSweetShopView
 
         private readonly IOrderLogic orderLogic;
 
-        public FormMain(MainLogic logic, IOrderLogic orderLogic)
+        private ReportLogic reportLogic;
+
+        private readonly WorkModeling workModeling;
+
+        private readonly BackUpAbstractLogic backUpAbstractLogic;
+
+        public FormMain(MainLogic logic, IOrderLogic orderLogic, ReportLogic reportLogic, WorkModeling workModeling, BackUpAbstractLogic backUpAbstractLogic)
         {
             InitializeComponent();
             this.logic = logic;
             this.orderLogic = orderLogic;
+            this.reportLogic = reportLogic;
+            this.workModeling = workModeling;
+            this.backUpAbstractLogic = backUpAbstractLogic;
         }
 
         private void ингредиентыToolStripMenuItem_Click(object sender, EventArgs e)
@@ -44,22 +53,11 @@ namespace AbstractSweetShopView
         {
             try
             {
-                var list = orderLogic.Read(null);
-                if (list != null)
-                {
-                    dataGridView.DataSource = list;
-                    dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[1].Visible = false;
-                    dataGridView.Columns[2].Width = 90;
-                    dataGridView.Columns[3].Width = 80;
-                    dataGridView.Columns[4].Width = 50;
-                    dataGridView.Columns[5].Width = 90;
-                    dataGridView.Columns[6].Width = 110;
-                    dataGridView.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                }
+                Program.ConfigGrid(orderLogic.Read(null), dataGridView);
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.InnerException.Message);
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -125,6 +123,75 @@ namespace AbstractSweetShopView
         private void buttonOrderRef_Click(object sender, EventArgs e)
         {
             LoadData();
+        }
+
+        private void productToWordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    reportLogic.SaveProductsToWord(new ReportBindingModel { FileName = dialog.FileName });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void ordersToExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportOrders>();
+            form.ShowDialog();
+        }
+
+        private void productIngredientToPdfToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportProductIngredient>();
+            form.ShowDialog();
+        }
+
+        private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormClients>();
+            form.ShowDialog();
+            LoadData();
+        }
+
+        private void исполнителиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormImplementers>();
+            form.ShowDialog();
+            LoadData();
+        }
+
+        private void запускРаботToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            workModeling.DoWork();
+        }
+
+        private void письмаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormMessages>();
+            form.ShowDialog();
+        }
+
+        private void создатьБекапToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (backUpAbstractLogic != null)
+                {
+                    var fbd = new FolderBrowserDialog();
+                    if (fbd.ShowDialog() == DialogResult.OK)
+                    {
+                        backUpAbstractLogic.CreateArchive(fbd.SelectedPath);
+                        MessageBox.Show("Бекап создан", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
