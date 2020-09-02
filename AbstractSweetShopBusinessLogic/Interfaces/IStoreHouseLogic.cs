@@ -16,8 +16,6 @@ namespace AbstractSweetShopBusinessLogic.Interfaces
 
         StoreHouseViewModel ReadStoreHouse(int id);
 
-        bool IsIngredientsAvailable(int productId, int countProduct);
-
         void SubtractIngredients(int productId, int countProduct);
     }
 }

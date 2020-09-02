@@ -36,22 +36,17 @@ namespace AbstractSweetShopBusinessLogic.BusinessLogics
                 throw new Exception("Не найден заказ");
             if (order.Status != OrderStatus.Принят)
                 throw new Exception("Заказ не в статусе \"Принят\"");
-            if (storeHouseLogic.IsIngredientsAvailable(order.ProductId, order.Count))
+            storeHouseLogic.SubtractIngredients(order.ProductId, order.Count);
+            orderLogic.CreateOrUpdate(new OrderBindingModel
             {
-                storeHouseLogic.SubtractIngredients(order.ProductId, order.Count);
-                orderLogic.CreateOrUpdate(new OrderBindingModel
-                {
-                    Id = order.Id,
-                    ProductId = order.ProductId,
-                    Count = order.Count,
-                    Sum = order.Sum,
-                    DateCreate = order.DateCreate,
-                    DateImplement = DateTime.Now,
-                    Status = OrderStatus.Выполняется
-                });
-            }
-            else
-                throw new Exception("Для выполнения заказа не хватает ингредиентов");
+                Id = order.Id,
+                ProductId = order.ProductId,
+                Count = order.Count,
+                Sum = order.Sum,
+                DateCreate = order.DateCreate,
+                DateImplement = DateTime.Now,
+                Status = OrderStatus.Выполняется
+            });
         }
 
         public void FinishOrder(ChangeStatusBindingModel model)
