@@ -88,7 +88,7 @@ namespace AbstractSweetShopDatabaseImplement.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("AbstractSweetShopDatabaseImplement.Models.ProductIngredient", b =>
+            modelBuilder.Entity("AbstractSweetShopDatabaseImplement.Models.ProductIngredients", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -163,7 +163,7 @@ namespace AbstractSweetShopDatabaseImplement.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("AbstractSweetShopDatabaseImplement.Models.ProductIngredient", b =>
+            modelBuilder.Entity("AbstractSweetShopDatabaseImplement.Models.ProductIngredients", b =>
                 {
                     b.HasOne("AbstractSweetShopDatabaseImplement.Models.Ingredient", "Ingredient")
                         .WithMany("ProductIngredients")
